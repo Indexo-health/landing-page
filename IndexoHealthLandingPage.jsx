@@ -1,0 +1,1102 @@
+import React, { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Check,
+  Shield,
+  Moon,
+  HeartPulse,
+  Waves,
+  Activity,
+  FileText,
+  Stethoscope,
+  Sparkles,
+  BadgeCheck,
+  HelpCircle,
+} from "lucide-react";
+
+const cx = (...classes) => classes.filter(Boolean).join(" ");
+
+function Pill({ children }) {
+  return (
+    <span className="inline-flex items-center rounded-full border border-brand/30 bg-white/70 px-3 py-1 text-xs font-semibold text-foreground/80 shadow-sm backdrop-blur">
+      {children}
+    </span>
+  );
+}
+
+function SectionTitle({ eyebrow, title, subtitle, align = "left" }) {
+  return (
+    <div className={cx("space-y-3", align === "center" ? "text-center" : "text-left")}>
+      {eyebrow ? (
+        <div className={cx("inline-flex items-center gap-2 text-xs font-semibold tracking-[0.12em]", align === "center" ? "justify-center" : "justify-start")}>
+          <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+          <span className="text-foreground/70">{eyebrow}</span>
+        </div>
+      ) : null}
+      <h2 className={cx("font-display text-3xl font-semibold tracking-tight sm:text-4xl", align === "center" ? "mx-auto" : "")}>{title}</h2>
+      {subtitle ? <p className="text-base text-foreground/70 sm:text-lg">{subtitle}</p> : null}
+    </div>
+  );
+}
+
+function Container({ children }) {
+  return <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">{children}</div>;
+}
+
+function FauxDeviceCard({ lang }) {
+  const labels =
+    lang === "zh"
+      ? {
+          brief: "晨间健康简报",
+          check: "夜间健康体检",
+          lastNight: "昨夜：稳定",
+          lastNightDesc: "未发现呼吸暂停迹象。",
+          hr: "心率",
+          rr: "呼吸频率",
+          spo2: "血氧",
+          hrHint: "次/分 • 平稳",
+          rrHint: "次/分 • 稳定",
+          spo2Hint: "% • 正常",
+          insights: "安心解读",
+          pdf: "医生报告",
+        }
+      : {
+          brief: "Morning Health Brief",
+          check: "Nightly Health Check",
+          lastNight: "Last Night: Stable",
+          lastNightDesc: "No signs of apnea detected.",
+          hr: "HR",
+          rr: "RR",
+          spo2: "SpO₂",
+          hrHint: "bpm • restful",
+          rrHint: "rpm • steady",
+          spo2Hint: "% • normal",
+          insights: "Plain‑English insights",
+          pdf: "Doctor‑ready PDF",
+        };
+
+  return (
+    <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/10 p-5 shadow-2xl backdrop-blur">
+      <div className="absolute -right-14 -top-14 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
+      <div className="absolute -bottom-20 -left-20 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
+
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2 text-xs text-white/80">
+          <span className="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-white/10">
+            <Moon className="h-4 w-4" />
+          </span>
+          <span>{labels.brief}</span>
+        </div>
+        <Pill>{labels.check}</Pill>
+      </div>
+
+      <div className="mt-4 rounded-2xl bg-black/20 p-4">
+        <div className="flex items-start gap-3">
+          <span className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-200">
+            <Shield className="h-5 w-5" />
+          </span>
+          <div className="space-y-1">
+            <div className="text-sm font-semibold text-white">{labels.lastNight}</div>
+            <div className="text-xs text-white/75">{labels.lastNightDesc}</div>
+          </div>
+        </div>
+
+        <div className="mt-4 grid grid-cols-3 gap-2">
+          <div className="rounded-xl bg-white/10 p-3">
+            <div className="flex items-center gap-2 text-[11px] text-white/80">
+              <HeartPulse className="h-4 w-4" /> {labels.hr}
+            </div>
+            <div className="mt-1 text-lg font-semibold text-white">58</div>
+            <div className="text-[10px] text-white/60">{labels.hrHint}</div>
+          </div>
+          <div className="rounded-xl bg-white/10 p-3">
+            <div className="flex items-center gap-2 text-[11px] text-white/80">
+              <Waves className="h-4 w-4" /> {labels.rr}
+            </div>
+            <div className="mt-1 text-lg font-semibold text-white">14</div>
+            <div className="text-[10px] text-white/60">{labels.rrHint}</div>
+          </div>
+          <div className="rounded-xl bg-white/10 p-3">
+            <div className="flex items-center gap-2 text-[11px] text-white/80">
+              <Activity className="h-4 w-4" /> {labels.spo2}
+            </div>
+            <div className="mt-1 text-lg font-semibold text-white">96</div>
+            <div className="text-[10px] text-white/60">{labels.spo2Hint}</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-4 flex items-center justify-between text-xs text-white/70">
+        <span className="inline-flex items-center gap-2">
+          <Sparkles className="h-4 w-4" /> {labels.insights}
+        </span>
+        <span className="inline-flex items-center gap-2">
+          <FileText className="h-4 w-4" /> {labels.pdf}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function PlaceholderRoomVisual({ assets, lang }) {
+  const labels =
+    lang === "zh"
+      ? {
+          scene: "一夜无扰，安心守护",
+          hint: "垫在床下 • 戒指在床头柜",
+        }
+      : {
+          scene: "A gentle, undisturbed night",
+          hint: "Pad under mattress • Ring on nightstand",
+        };
+
+  if (assets && assets.heroBedroom) {
+    return (
+      <div className="relative overflow-hidden rounded-3xl border border-foreground/10 bg-background/80 shadow-2xl">
+        <img src={assets.heroBedroom} alt="Bedroom scene" className="h-[420px] w-full object-cover" />
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent p-4">
+          <div className="flex items-center justify-between text-white">
+            <div className="text-sm font-medium">{labels.scene}</div>
+            <span className="text-xs text-white/80">{labels.hint}</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Simple “warm bedroom” illustration (no external images)
+  return (
+    <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-white/10 p-6 shadow-2xl backdrop-blur">
+      <div className="absolute inset-0 opacity-60">
+        <svg viewBox="0 0 800 520" className="h-full w-full">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stopColor="rgba(255,255,255,0.10)" />
+              <stop offset="1" stopColor="rgba(255,255,255,0.02)" />
+            </linearGradient>
+            <linearGradient id="g2" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stopColor="rgba(255,255,255,0.08)" />
+              <stop offset="1" stopColor="rgba(255,255,255,0.01)" />
+            </linearGradient>
+          </defs>
+          {/* Wall */}
+          <rect x="0" y="0" width="800" height="520" fill="url(#g1)" />
+          {/* Floor */}
+          <rect x="0" y="340" width="800" height="180" fill="url(#g2)" />
+          {/* Bed */}
+          <rect x="120" y="240" width="520" height="130" rx="26" fill="rgba(255,255,255,0.14)" />
+          <rect x="150" y="270" width="460" height="70" rx="22" fill="rgba(0,0,0,0.18)" />
+          {/* Pad hint under mattress */}
+          <rect x="170" y="320" width="420" height="14" rx="8" fill="rgba(255,255,255,0.18)" />
+          <rect x="170" y="320" width="220" height="14" rx="8" fill="rgba(16,185,129,0.35)" />
+          {/* Nightstand */}
+          <rect x="645" y="250" width="95" height="120" rx="18" fill="rgba(255,255,255,0.12)" />
+          {/* Ring */}
+          <circle cx="692" cy="278" r="18" fill="rgba(255,255,255,0.18)" />
+          <circle cx="692" cy="278" r="10" fill="rgba(0,0,0,0.18)" />
+          {/* Phone */}
+          <rect x="630" y="305" width="130" height="210" rx="26" fill="rgba(0,0,0,0.30)" />
+          <rect x="642" y="325" width="106" height="168" rx="16" fill="rgba(255,255,255,0.08)" />
+          <rect x="654" y="338" width="82" height="40" rx="12" fill="rgba(16,185,129,0.22)" />
+          <rect x="654" y="385" width="82" height="18" rx="9" fill="rgba(255,255,255,0.12)" />
+          <rect x="654" y="408" width="82" height="18" rx="9" fill="rgba(255,255,255,0.12)" />
+        </svg>
+      </div>
+
+      <div className="relative">
+        <div className="flex items-center justify-between">
+          <div className="text-sm font-medium">{labels.scene}</div>
+          <span className="text-xs text-foreground/70">{labels.hint}</span>
+        </div>
+        <div className="mt-4">
+          <FauxDeviceCard lang={lang} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AppPreviewCard({ src, lang }) {
+  if (!src) return null;
+  return (
+    <div className="rounded-3xl border border-foreground/10 bg-white/80 p-4 shadow-sm">
+      <div className="text-xs text-foreground/70">{lang === "zh" ? "晨间简报示例" : "Morning brief preview"}</div>
+      <div className="mt-3 overflow-hidden rounded-2xl border border-foreground/10 bg-white">
+        <img src={src} alt="App screenshot" className="h-72 w-full object-cover" />
+      </div>
+    </div>
+  );
+}
+
+function Stat({ icon: Icon, label, value, hint }) {
+  return (
+    <div className="rounded-2xl border border-foreground/10 bg-white/80 p-4 shadow-sm">
+      <div className="flex items-center gap-2 text-xs text-foreground/70">
+        <Icon className="h-4 w-4" />
+        {label}
+      </div>
+      <div className="font-display mt-2 text-3xl font-semibold tracking-tight">{value}</div>
+      {hint ? <div className="mt-1 text-xs text-foreground/60">{hint}</div> : null}
+    </div>
+  );
+}
+
+function FeatureLine({ icon: Icon, title, desc }) {
+  return (
+    <div className="flex gap-3 rounded-2xl border border-foreground/10 bg-white/80 p-4">
+      <div className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-brand/10 text-brand">
+        <Icon className="h-5 w-5" />
+      </div>
+      <div className="space-y-1">
+        <div className="text-sm font-semibold">{title}</div>
+        <div className="text-sm text-foreground/70">{desc}</div>
+      </div>
+    </div>
+  );
+}
+
+function AccordionItem({ q, a, open, onToggle }) {
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      className="w-full rounded-2xl border border-foreground/10 bg-white/80 p-4 text-left transition hover:bg-brand/10"
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div className="space-y-1">
+          <div className="text-sm font-semibold">{q}</div>
+          {open ? <div className="text-sm text-foreground/70">{a}</div> : null}
+        </div>
+        <div className="mt-0.5 text-foreground/60">
+          <HelpCircle className={cx("h-5 w-5", open ? "opacity-100" : "opacity-70")} />
+        </div>
+      </div>
+    </button>
+  );
+}
+
+export default function LandingPageNightlyHealthCheck() {
+  const [lang, setLang] = useState("en");
+  const [faqOpen, setFaqOpen] = useState(0);
+  const assets = {
+    logo: "/assets/indexohealth_logo_400.png",
+    heroBedroom: "/assets/heroBedroom.jpg",
+    appScreenshot: "/assets/appScreenshot.PNG",
+    ringCloseup: "/assets/ringCloseup.png",
+    ringOnFinger: "/assets/SpO2_ring_on_finger.JPG",
+    padUnderMattress: "/assets/padUnderMattress_1.jpg",
+    padUnderMattressAlt: "/assets/padUnderMattress_2.jpg",
+    padRingCombo: "/assets/Mat+SpO2Ring.JPG",
+  };
+
+  const copy = useMemo(() => {
+    const en = {
+      nav: { brand: "Indexo Health", tag: "Through the lens of Sleep" },
+      hero: {
+        pill1: "The Right to Know",
+        pill2: "Certainty, not anxiety",
+        pill3: "Nightly Health Check",
+        headline: "The Most Honest Health Check Happens Every Night.",
+        sub:
+          "Sleep reveals risks you can’t feel while awake. Our dual-sensor system listens all night and delivers a clear morning brief.",
+        ctaPrimary: "Reveal My Nightly Health",
+        ctaSecondary: "See how it works",
+        slogan: "Your Health Speaks When You Sleep. We Listen.",
+      },
+      trust: {
+        a: "Undisturbed sleep",
+        b: "Dual sensors (Pad + Ring)",
+        c: "Morning brief + PDF",
+      },
+      problem: {
+        eyebrow: "The Problem",
+        title: "Nighttime Risks Often Go Unnoticed.",
+        sub:
+          "Breathing pauses and oxygen drops happen silently. You wake up tired, but the cause stays hidden.",
+        scenarios: [
+          { q: "Did I stop breathing during the night?", icon: Waves },
+          { q: "Why am I still exhausted after 8 hours?", icon: Moon },
+          { q: "Is my heart really resting at night?", icon: HeartPulse },
+        ],
+      },
+      solution: {
+        eyebrow: "The Solution",
+        title: "One System. Two Roles. Full Coverage.",
+        sub:
+          "Pad is always on. Ring is for precision checks when you need them.",
+        pad: {
+          title: "The Pad — The Silent Guardian",
+          bullets: [
+            "Effortless monitoring with no wearables.",
+            "Builds your nightly baseline over time.",
+          ],
+          footer: "Best for everyday monitoring",
+        },
+        ring: {
+          title: "The Ring — The Precision Specialist",
+          bullets: [
+            "Deep dives when you want answers.",
+            "Medical-grade oxygen insights and apnea risk.",
+          ],
+          footer: "Best for targeted checks",
+        },
+      },
+      value: {
+        eyebrow: "The Value",
+        title: "Wake Up to Certainty.",
+        sub:
+          "We surface risk signals, explain them clearly, and notify the people who should know.",
+        features: [
+          {
+            icon: BadgeCheck,
+            title: "Risk Signals You Can Act On",
+            desc: "Clear guidance instead of raw charts.",
+          },
+          {
+            icon: Stethoscope,
+            title: "Share with Family or Clinicians",
+            desc: "Morning brief plus PDF for follow-up.",
+          },
+          {
+            icon: Activity,
+            title: "Long‑Term Trends",
+            desc: "See changes over weeks, not just one night.",
+          },
+        ],
+      },
+      model: {
+        eyebrow: "How It Works",
+        title: "Morning Health Brief Flow.",
+        sub:
+          "No alarms at night. Wake up to a clear brief and next steps.",
+        steps: [
+          { title: "Sleep", desc: "Sleep naturally, no disruption.", icon: Moon },
+          { title: "Analyze", desc: "We review anomalies and context.", icon: Sparkles },
+          { title: "Brief", desc: "Get your morning brief + PDF.", icon: FileText },
+        ],
+        pricingTitle: "1st Year of Premium Care Included",
+        pricingDesc:
+          "Unlimited history storage, advanced risk briefs, and doctor-ready PDF export. (Replace with your final plan details.)",
+        cta: "Get the Nightly Health Check",
+      },
+      proof: {
+        eyebrow: "Trust & FAQ",
+        title: "Built for Calm, Actionable Confidence.",
+        sub:
+          "Add your real clinical & compliance statements here — and any validation, partners, or certifications you’re allowed to claim.",
+      },
+      faq: [
+        {
+          q: "Does it have a real-time alarm?",
+          a:
+            "No. We prioritize undisturbed sleep. You’ll receive a safety check report the moment you wake up, so you can act without being woken up.",
+        },
+        {
+          q: "Is this a medical device?",
+          a:
+            "Use your approved compliance wording here. Typical framing: ‘Helpful for screening and sharing objective data with clinicians.’ Avoid making diagnostic claims unless cleared/approved.",
+        },
+        {
+          q: "Do I need to wear the ring every night?",
+          a:
+            "Not necessarily. The pad supports everyday monitoring. Use the ring when you want more precise oxygen and apnea-risk insights.",
+        },
+      ],
+      footer: {
+        note:
+          "Disclaimer placeholder: This page is a marketing prototype. Replace all compliance-related claims (FDA/clinical/diagnosis) with your officially approved language.",
+      },
+    };
+
+    const zh = {
+      ...en,
+      nav: { brand: "Indexo Health", tag: "通过睡眠透视健康" },
+      hero: {
+        ...en.hero,
+        pill3: "夜间健康体检",
+        headline: "最诚实的健康体检，发生在每一晚。",
+        sub:
+          "很多风险只在夜里出现。双传感器系统整夜倾听，醒来给你清晰的晨间简报。",
+        ctaPrimary: "揭示我的夜间健康",
+        ctaSecondary: "看看如何工作",
+        slogan: "你的健康在睡梦中说话，我们在倾听。",
+      },
+      trust: {
+        a: "不打扰睡眠（无实时报警）",
+        b: "双传感器系统（垫 + 戒指）",
+        c: "晨间简报 + 报告导出",
+      },
+      problem: {
+        ...en.problem,
+        eyebrow: "问题",
+        title: "夜里的风险常被忽略。",
+        sub:
+          "呼吸暂停、血氧下降常在夜里悄悄发生。你醒来疲惫，却不知道原因。",
+        scenarios: [
+          { q: "昨夜有没有出现呼吸暂停？", icon: Waves },
+          { q: "为什么睡够了还是很累？", icon: Moon },
+          { q: "我的心脏在夜里真的休息了吗？", icon: HeartPulse },
+        ],
+      },
+      solution: {
+        ...en.solution,
+        eyebrow: "解决方案",
+        title: "一套系统，两个角色。",
+        sub: "垫负责日常守护，戒指负责精准检查。",
+        pad: {
+          ...en.solution.pad,
+          title: "垫 — 无声守护",
+          bullets: ["无感监测，不需要佩戴。", "建立夜间基线趋势。"],
+          footer: "适合每日使用",
+        },
+        ring: {
+          ...en.solution.ring,
+          title: "戒指 — 精准专家",
+          bullets: ["需要时深度体检。", "临床级血氧与呼吸风险评估。"],
+          footer: "适合定点筛查",
+        },
+      },
+      value: {
+        ...en.value,
+        eyebrow: "价值",
+        title: "在“确定的安心”中醒来。",
+        sub: "我们识别风险、清晰解释，并提醒你和家属。",
+        features: [
+          {
+            icon: BadgeCheck,
+            title: "可行动的风险提示",
+            desc: "给出清晰结论，而不是原始图表。",
+          },
+          {
+            icon: Stethoscope,
+            title: "可共享的晨间简报",
+            desc: "提醒你和家属，也可提供给医生。",
+          },
+          {
+            icon: Activity,
+            title: "长期趋势追踪",
+            desc: "看清数周变化，而非单晚波动。",
+          },
+        ],
+      },
+      model: {
+        ...en.model,
+        eyebrow: "服务流程",
+        title: "晨间简报流程。",
+        sub: "不做夜间报警，醒来即得到清晰结论与行动建议。",
+        steps: [
+          { title: "睡眠", desc: "自然入睡，无打扰。", icon: Moon },
+          { title: "分析", desc: "识别异常与背景。", icon: Sparkles },
+          { title: "简报", desc: "获取晨间简报与报告。", icon: FileText },
+        ],
+        pricingTitle: "首年高级看护服务已包含",
+        pricingDesc: "包含：历史数据存储、风险评估简报、医生报告导出（用你的最终方案替换）。",
+        cta: "开始夜间健康体检",
+      },
+      proof: {
+        ...en.proof,
+        eyebrow: "信任与常见问题",
+        title: "更温柔的看护，更踏实的安心。",
+        sub: "请在此处放入你的合规声明、验证数据或合作信息。",
+      },
+      faq: [
+        {
+          q: "有实时报警吗？",
+          a: "没有。我们相信高质量睡眠不该被打断。醒来后你会收到‘安全检查报告’，帮助你带着证据去行动。",
+        },
+        {
+          q: "这是医疗器械吗？",
+          a: "请在此处替换为可公开的合规文案（临床/诊断措辞需按批准版本）。",
+        },
+        {
+          q: "戒指需要每天戴吗？",
+          a: "不一定。垫负责日常趋势；当你想更精准了解血氧与呼吸暂停风险时再佩戴戒指即可。",
+        },
+      ],
+      footer: {
+        note: "免责声明占位：请用正式合规文案替换此处内容。",
+      },
+    };
+
+    return lang === "zh" ? zh : en;
+  }, [lang]);
+
+  const problemStats = [
+    {
+      icon: Activity,
+      label: lang === "zh" ? "夜间异常不易察觉" : "Night anomalies are invisible",
+      value: lang === "zh" ? "看不见" : "Unseen",
+      hint: lang === "zh" ? "悄无声息发生" : "They happen quietly",
+    },
+    {
+      icon: FileText,
+      label: lang === "zh" ? "醒来仍然疲惫" : "You wake up exhausted",
+      value: lang === "zh" ? "原因不明" : "No answers",
+      hint: lang === "zh" ? "没有清晰解释" : "The cause is unclear",
+    },
+    {
+      icon: Shield,
+      label: lang === "zh" ? "家属担心却没证据" : "Family worries without proof",
+      value: lang === "zh" ? "缺证据" : "No proof",
+      hint: lang === "zh" ? "只能靠猜测" : "Only guesses",
+    },
+  ];
+
+  const motionIn = {
+    initial: { opacity: 0, y: 10 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.25 },
+    transition: { duration: 0.6, ease: "easeOut" },
+  };
+
+  return (
+    <div id="top" className="min-h-screen bg-gradient-to-b from-surface via-background to-background text-foreground">
+      {/* Top gradient */}
+      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[520px] bg-gradient-to-b from-brand/15 via-brand-2/10 to-transparent" />
+
+      {/* Header */}
+      <header className="sticky top-0 z-40 border-b border-foreground/10 bg-background/90 backdrop-blur">
+        <Container>
+          <div className="flex h-20 items-center justify-between">
+            <div className="flex items-center gap-3">
+              <a href="#top" className="inline-flex items-center gap-3">
+                <div className="inline-flex items-center justify-center overflow-hidden rounded-2xl border border-foreground/10 bg-white/80 px-3 py-2 shadow-sm">
+                  {assets.logo ? (
+                    <img src={assets.logo} alt="Indexo Health logo" className="h-12 w-auto object-contain" />
+                  ) : (
+                    <Moon className="h-6 w-6 text-foreground/70" />
+                  )}
+                </div>
+                <div className="text-sm text-foreground/70">{copy.nav.tag}</div>
+              </a>
+            </div>
+
+            <div className="hidden items-center gap-6 text-sm text-foreground/70 md:flex">
+              <a href="#problem" className="hover:text-brand">{lang === "zh" ? "痛点" : "Problem"}</a>
+              <a href="#solution" className="hover:text-brand">{lang === "zh" ? "方案" : "Solution"}</a>
+              <a href="#value" className="hover:text-brand">{lang === "zh" ? "安心" : "Certainty"}</a>
+              <a href="#pricing" className="hover:text-brand">{lang === "zh" ? "服务" : "Care"}</a>
+              <button
+                type="button"
+                onClick={() => setLang((v) => (v === "en" ? "zh" : "en"))}
+                className="inline-flex items-center rounded-xl border border-foreground/10 bg-white/80 px-3 py-2 text-xs font-medium hover:bg-brand/10"
+              >
+                {lang === "zh" ? "EN" : "中文"}
+              </button>
+            </div>
+
+            <a
+              href="#pricing"
+              className="inline-flex items-center gap-2 rounded-2xl bg-brand px-4 py-2 text-sm font-semibold text-white shadow hover:bg-brand/90"
+            >
+              {copy.model.cta}
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </Container>
+      </header>
+
+      {/* Hero */}
+      <section className="relative overflow-hidden py-14 sm:py-20">
+        <Container>
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <motion.div {...motionIn} className="space-y-6">
+              <div className="flex flex-wrap items-center gap-2">
+                <Pill>{copy.hero.pill1}</Pill>
+                <Pill>{copy.hero.pill2}</Pill>
+                <Pill>{copy.hero.pill3}</Pill>
+              </div>
+
+              <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-6xl">
+                {copy.hero.headline}
+              </h1>
+
+              <p className="max-w-xl text-base text-foreground/70 sm:text-lg">{copy.hero.sub}</p>
+
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <a
+                  href="#pricing"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow hover:bg-brand/90"
+                >
+                  {copy.hero.ctaPrimary}
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <a
+                  href="#solution"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-brand/30 bg-white/70 px-5 py-3 text-sm font-semibold hover:bg-brand/10"
+                >
+                  {copy.hero.ctaSecondary}
+                  <ArrowRight className="h-4 w-4 opacity-70" />
+                </a>
+              </div>
+
+              <div className="rounded-3xl border border-brand/20 bg-white/70 p-5 shadow-sm">
+                <div className="text-base font-semibold">{copy.hero.slogan}</div>
+                <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                  <div className="flex items-center gap-2 text-sm text-foreground/70">
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-brand/10 text-brand">
+                      <Moon className="h-4 w-4" />
+                    </span>
+                    {copy.trust.a}
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-foreground/70">
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-brand/10 text-brand">
+                      <Shield className="h-4 w-4" />
+                    </span>
+                    {copy.trust.b}
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-foreground/70">
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-brand/10 text-brand">
+                      <FileText className="h-4 w-4" />
+                    </span>
+                    {copy.trust.c}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div {...motionIn} transition={{ ...motionIn.transition, delay: 0.05 }} className="space-y-4">
+              <PlaceholderRoomVisual assets={assets} lang={lang} />
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="rounded-2xl border border-foreground/10 bg-white/80 p-4">
+                  <div className="text-xs text-foreground/70">{lang === "zh" ? "系统" : "System"}</div>
+                  <div className="mt-2 text-sm font-semibold">
+                    {lang === "zh" ? "Pad + Ring 双传感器" : "Dual sensors: Pad + Ring"}
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-foreground/10 bg-white/80 p-4">
+                  <div className="text-xs text-foreground/70">{lang === "zh" ? "服务" : "Care"}</div>
+                  <div className="mt-2 text-sm font-semibold">
+                    {lang === "zh" ? "晨间简报与可导出报告" : "Morning brief + exportable report"}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Problem */}
+      <section id="problem" className="py-14 sm:py-20">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-2">
+            <motion.div {...motionIn} className="space-y-6">
+              <SectionTitle eyebrow={copy.problem.eyebrow} title={copy.problem.title} subtitle={copy.problem.sub} />
+
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                {problemStats.map((s, idx) => (
+                  <motion.div key={idx} {...motionIn} transition={{ ...motionIn.transition, delay: 0.03 * idx }}>
+                    <Stat {...s} />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div {...motionIn} className="grid gap-3">
+              {copy.problem.scenarios.map((it, idx) => (
+                <div key={idx} className="flex items-center gap-3 rounded-2xl border border-foreground/10 bg-background/60 p-4">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-foreground/5">
+                    <it.icon className="h-5 w-5 text-foreground/70" />
+                  </span>
+                  <div className="text-sm font-semibold">“{it.q}”</div>
+                </div>
+              ))}
+
+            </motion.div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Solution */}
+      <section id="solution" className="py-14 sm:py-20">
+        <Container>
+          <div className="space-y-8">
+            <motion.div {...motionIn}>
+              <SectionTitle eyebrow={copy.solution.eyebrow} title={copy.solution.title} subtitle={copy.solution.sub} />
+            </motion.div>
+
+            <div className="grid gap-6 lg:grid-cols-2">
+              {/* Pad */}
+              <motion.div {...motionIn} className="relative overflow-hidden rounded-3xl border border-foreground/10 bg-background/60 p-6">
+                <div className="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-foreground/5 blur-2xl" />
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="text-sm font-semibold">{copy.solution.pad.title}</div>
+                    <div className="mt-1 text-xs text-foreground/70">{lang === "zh" ? "每日无感守护" : "Daily, passive monitoring"}</div>
+                  </div>
+                  <span className="inline-flex items-center gap-2 rounded-2xl bg-foreground/5 px-3 py-2 text-xs text-foreground/70">
+                    <Shield className="h-4 w-4" /> {copy.solution.pad.footer}
+                  </span>
+                </div>
+                {assets.padUnderMattress ? (
+                  <div className="mt-4 overflow-hidden rounded-2xl border border-foreground/10 shadow-sm">
+                    <img
+                      src={assets.padUnderMattress}
+                      alt="Pad under mattress"
+                      className="h-52 w-full object-cover"
+                    />
+                  </div>
+                ) : null}
+
+                <div className="mt-5 grid gap-3">
+                  {copy.solution.pad.bullets.map((b, i) => (
+                    <div key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+                      <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-foreground/5">
+                        <Check className="h-3.5 w-3.5" />
+                      </span>
+                      <span>{b}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-6 rounded-2xl border border-foreground/10 bg-background/70 p-4">
+                  <div className="text-xs text-foreground/70">{lang === "zh" ? "你会看到" : "You’ll see"}</div>
+                  <div className="mt-2 grid grid-cols-3 gap-2">
+                    <div className="rounded-xl bg-foreground/[0.04] p-3">
+                      <div className="text-[11px] text-foreground/70">{lang === "zh" ? "心率" : "HR"}</div>
+                      <div className="text-lg font-semibold">{lang === "zh" ? "趋势" : "Trend"}</div>
+                    </div>
+                    <div className="rounded-xl bg-foreground/[0.04] p-3">
+                      <div className="text-[11px] text-foreground/70">{lang === "zh" ? "呼吸频率" : "RR"}</div>
+                      <div className="text-lg font-semibold">{lang === "zh" ? "基线" : "Baseline"}</div>
+                    </div>
+                    <div className="rounded-xl bg-foreground/[0.04] p-3">
+                      <div className="text-[11px] text-foreground/70">{lang === "zh" ? "睡眠" : "Sleep"}</div>
+                      <div className="text-lg font-semibold">{lang === "zh" ? "行为" : "Behavior"}</div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Ring */}
+              <motion.div {...motionIn} className="relative overflow-hidden rounded-3xl border border-foreground/10 bg-background/60 p-6">
+                <div className="absolute -left-16 -bottom-16 h-44 w-44 rounded-full bg-foreground/5 blur-2xl" />
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="text-sm font-semibold">{copy.solution.ring.title}</div>
+                    <div className="mt-1 text-xs text-foreground/70">{lang === "zh" ? "需要时精准体检" : "Precision checks when needed"}</div>
+                  </div>
+                  <span className="inline-flex items-center gap-2 rounded-2xl bg-foreground/5 px-3 py-2 text-xs text-foreground/70">
+                    <Activity className="h-4 w-4" /> {copy.solution.ring.footer}
+                  </span>
+                </div>
+                {assets.ringCloseup ? (
+                  <div className="mt-4 overflow-hidden rounded-2xl border border-foreground/10 shadow-sm">
+                    <img
+                      src={assets.ringCloseup}
+                      alt="Ring closeup"
+                      className="h-52 w-full object-cover"
+                    />
+                  </div>
+                ) : null}
+
+                <div className="mt-5 grid gap-3">
+                  {copy.solution.ring.bullets.map((b, i) => (
+                    <div key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+                      <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-foreground/5">
+                        <Check className="h-3.5 w-3.5" />
+                      </span>
+                      <span>{b}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-6 rounded-2xl border border-foreground/10 bg-background/70 p-4">
+                  <div className="text-xs text-foreground/70">{lang === "zh" ? "你会看到" : "You’ll see"}</div>
+                  <div className="mt-2 grid grid-cols-3 gap-2">
+                    <div className="rounded-xl bg-foreground/[0.04] p-3">
+                      <div className="text-[11px] text-foreground/70">SpO₂</div>
+                      <div className="text-lg font-semibold">{lang === "zh" ? "下降" : "Drops"}</div>
+                    </div>
+                    <div className="rounded-xl bg-foreground/[0.04] p-3">
+                      <div className="text-[11px] text-foreground/70">ODI</div>
+                      <div className="text-lg font-semibold">{lang === "zh" ? "模式" : "Pattern"}</div>
+                    </div>
+                    <div className="rounded-xl bg-foreground/[0.04] p-3">
+                      <div className="text-[11px] text-foreground/70">{lang === "zh" ? "呼吸暂停" : "Apnea"}</div>
+                      <div className="text-lg font-semibold">{lang === "zh" ? "风险" : "Risk"}</div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            <motion.div {...motionIn} className="rounded-3xl border border-foreground/10 bg-white/70 p-6 shadow-sm">
+              <div className="grid gap-4 lg:grid-cols-3">
+                <div className="rounded-3xl border border-foreground/10 bg-background/70 p-5">
+                  <div className="flex items-center gap-2 text-xs text-foreground/60">
+                    <Shield className="h-4 w-4" />
+                    {lang === "zh" ? "垫" : "Pad"}
+                  </div>
+                  <div className="mt-3 text-lg font-semibold">
+                    {lang === "zh" ? "无需穿戴，整夜守护" : "No wearables, always on"}
+                  </div>
+                  <div className="mt-1 text-sm text-foreground/70">
+                    {lang === "zh" ? "铺在床下，自动记录夜间趋势。" : "Under-mattress sensing for nightly trends."}
+                  </div>
+                </div>
+                <div className="rounded-3xl border border-foreground/10 bg-background/70 p-5">
+                  <div className="flex items-center gap-2 text-xs text-foreground/60">
+                    <Activity className="h-4 w-4" />
+                    {lang === "zh" ? "戒指" : "Ring"}
+                  </div>
+                  <div className="mt-3 text-lg font-semibold">
+                    {lang === "zh" ? "精准测量，随需佩戴" : "Precision SpO₂ when needed"}
+                  </div>
+                  <div className="mt-1 text-sm text-foreground/70">
+                    {lang === "zh" ? "需要时佩戴，获取更深度呼吸分析。" : "Wear for deeper oxygen and apnea insights."}
+                  </div>
+                </div>
+                <div className="rounded-3xl border border-foreground/10 bg-background/70 p-5">
+                  <div className="flex items-center gap-2 text-xs text-foreground/60">
+                    <Sparkles className="h-4 w-4" />
+                    {lang === "zh" ? "结果" : "Outcome"}
+                  </div>
+                  <div className="mt-3 text-lg font-semibold">
+                    {lang === "zh" ? "更高依从性，家属安心" : "Higher adherence, shared peace of mind"}
+                  </div>
+                  <div className="mt-1 text-sm text-foreground/70">
+                    {lang === "zh" ? "日常零负担，异常时精准确认。" : "Zero burden daily, precise checks when needed."}
+                  </div>
+                </div>
+              </div>
+
+              {(assets.padRingCombo || assets.padUnderMattressAlt || assets.ringOnFinger) ? (
+                <div className="mt-5 grid gap-4 lg:grid-cols-3">
+                  {assets.padRingCombo ? (
+                    <div className="overflow-hidden rounded-2xl border border-foreground/10">
+                      <img src={assets.padRingCombo} alt="Pad and ring" className="h-48 w-full object-cover" />
+                    </div>
+                  ) : null}
+                  {assets.padUnderMattressAlt ? (
+                    <div className="overflow-hidden rounded-2xl border border-foreground/10">
+                      <img src={assets.padUnderMattressAlt} alt="Pad under mattress" className="h-48 w-full object-cover" />
+                    </div>
+                  ) : null}
+                  {assets.ringOnFinger ? (
+                    <div className="overflow-hidden rounded-2xl border border-foreground/10">
+                      <img src={assets.ringOnFinger} alt="Ring on finger" className="h-48 w-full object-cover" />
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
+            </motion.div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Value */}
+      <section id="value" className="py-14 sm:py-20">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-2">
+            <motion.div {...motionIn}>
+              <SectionTitle eyebrow={copy.value.eyebrow} title={copy.value.title} subtitle={copy.value.sub} />
+              <div className="mt-6 space-y-3">
+                {copy.value.features.map((f, i) => (
+                  <FeatureLine key={i} icon={f.icon} title={f.title} desc={f.desc} />
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div {...motionIn} className="rounded-3xl border border-foreground/10 bg-white/80 p-6 shadow-sm">
+              <div className="space-y-4">
+                <AppPreviewCard src={assets.appScreenshot} lang={lang} />
+                <div className="text-sm font-semibold">{lang === "zh" ? "醒来后的安心提醒" : "Certainty after you wake"}</div>
+              </div>
+              <div className="mt-4 grid gap-3">
+                <div className="rounded-2xl border border-foreground/10 bg-background/70 p-4">
+                  <div className="flex items-center gap-2 text-xs text-foreground/70">
+                    <Shield className="h-4 w-4" />
+                    {lang === "zh" ? "夜间风险提示" : "Nightly risk flags"}
+                  </div>
+                  <div className="mt-2 text-sm font-semibold">
+                    {lang === "zh" ? "清晰结论 + 下一步建议" : "Clear conclusions + next steps"}
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-foreground/10 bg-foreground/[0.03] p-4">
+                  <div className="flex items-center gap-2 text-xs text-foreground/70">
+                    <Sparkles className="h-4 w-4" />
+                    {lang === "zh" ? "家属同步" : "Share with family"}
+                  </div>
+                  <div className="mt-2 text-sm font-semibold">
+                    {lang === "zh" ? "异常时提醒家属" : "Notify trusted contacts"}
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-foreground/10 bg-background/70 p-4">
+                  <div className="flex items-center gap-2 text-xs text-foreground/70">
+                    <FileText className="h-4 w-4" />
+                    {lang === "zh" ? "医生报告" : "Doctor-ready report"}
+                  </div>
+                  <div className="mt-2 text-sm font-semibold">
+                    {lang === "zh" ? "晨间简报 + 报告导出" : "Morning brief + PDF export"}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Care model & pricing */}
+      <section id="pricing" className="py-14 sm:py-20">
+        <Container>
+          <div className="space-y-8">
+            <motion.div {...motionIn}>
+              <SectionTitle eyebrow={copy.model.eyebrow} title={copy.model.title} subtitle={copy.model.sub} />
+            </motion.div>
+
+            <div className="grid gap-6 lg:grid-cols-3">
+              {copy.model.steps.map((s, idx) => (
+                <motion.div key={idx} {...motionIn} transition={{ ...motionIn.transition, delay: idx * 0.03 }}>
+                  <div className="h-full rounded-3xl border border-foreground/10 bg-background/60 p-6">
+                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-foreground/5">
+                      <s.icon className="h-6 w-6 text-foreground/70" />
+                    </div>
+                    <div className="mt-4 text-sm font-semibold">{idx + 1}. {s.title}</div>
+                    <div className="mt-2 text-sm text-foreground/70">{s.desc}</div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div {...motionIn} className="grid gap-6 lg:grid-cols-5">
+              <div className="lg:col-span-3 rounded-3xl border border-foreground/10 bg-foreground/[0.03] p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="text-sm font-semibold">{copy.model.pricingTitle}</div>
+                    <div className="mt-2 text-sm text-foreground/70">{copy.model.pricingDesc}</div>
+                  </div>
+                  <span className="inline-flex items-center gap-2 rounded-2xl bg-foreground/5 px-3 py-2 text-xs text-foreground/70">
+                    <Shield className="h-4 w-4" /> Premium Care
+                  </span>
+                </div>
+
+                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-2xl bg-background/60 p-4">
+                    <div className="text-xs text-foreground/70">{lang === "zh" ? "包含" : "Includes"}</div>
+                    <div className="mt-1 text-sm font-semibold">{lang === "zh" ? "无限历史存储" : "Unlimited history"}</div>
+                  </div>
+                  <div className="rounded-2xl bg-background/60 p-4">
+                    <div className="text-xs text-foreground/70">{lang === "zh" ? "包含" : "Includes"}</div>
+                    <div className="mt-1 text-sm font-semibold">{lang === "zh" ? "高级风险简报" : "Advanced risk briefs"}</div>
+                  </div>
+                  <div className="rounded-2xl bg-background/60 p-4">
+                    <div className="text-xs text-foreground/70">{lang === "zh" ? "包含" : "Includes"}</div>
+                    <div className="mt-1 text-sm font-semibold">{lang === "zh" ? "医生报告" : "Doctor-ready PDF"}</div>
+                  </div>
+                  <div className="rounded-2xl bg-background/60 p-4">
+                    <div className="text-xs text-foreground/70">{lang === "zh" ? "包含" : "Includes"}</div>
+                    <div className="mt-1 text-sm font-semibold">{lang === "zh" ? "趋势与基线" : "Trends & baseline"}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:col-span-2 rounded-3xl border border-foreground/10 bg-background/60 p-6">
+                <div className="text-sm font-semibold">{lang === "zh" ? "下一步" : "Next step"}</div>
+                <div className="mt-2 text-sm text-foreground/70">
+                  {lang === "zh"
+                    ? "把你的 CTA、表单、或购买链接接到这里（例如：预约创始人对话 / 申请试用 / 直接购买）。"
+                    : "Connect your CTA, form, or purchase link here (e.g., Founder call / Trial application / Buy now)."}
+                </div>
+                <div className="mt-5 space-y-3">
+                  <a
+                    href="#"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-foreground px-5 py-3 text-sm font-semibold text-background shadow hover:opacity-90"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    {copy.model.cta}
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                  <div className="text-xs text-foreground/60">
+                    {lang === "zh"
+                      ? "（原型页面：此按钮当前不跳转）"
+                      : "(Prototype: button does not navigate yet)"}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Trust & FAQ */}
+      <section className="py-14 sm:py-20">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-2">
+            <motion.div {...motionIn}>
+              <SectionTitle eyebrow={copy.proof.eyebrow} title={copy.proof.title} subtitle={copy.proof.sub} />
+
+              <div className="mt-6 grid gap-3">
+                <div className="rounded-3xl border border-foreground/10 bg-background/60 p-6">
+                  <div className="flex items-center gap-2 text-sm font-semibold">
+                    <BadgeCheck className="h-5 w-5 text-foreground/70" />
+                    {lang === "zh" ? "你需要补齐的关键信息（占位）" : "What you still need to fill in (placeholders)"}
+                  </div>
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-foreground/70">
+                    <li>{lang === "zh" ? "产品命名与定价方案" : "Product naming and pricing"}</li>
+                    <li>{lang === "zh" ? "合规文案与允许的声明范围" : "Compliance copy and allowed claims"}</li>
+                    <li>{lang === "zh" ? "信任背书（数据/合作/评价）" : "Trust signals (data/partners/testimonials)"}</li>
+                  </ul>
+                </div>
+
+                <div className="rounded-3xl border border-foreground/10 bg-foreground/[0.03] p-6">
+                  <div className="text-sm font-semibold">{lang === "zh" ? "我已经按你的内容实现了" : "Already implemented from your brief"}</div>
+                  <div className="mt-3 grid gap-2 sm:grid-cols-2 text-sm text-foreground/70">
+                    {(lang === "zh"
+                      ? ["夜间健康体检框架", "垫=守护 / 戒指=专家", "不打扰睡眠定位", "晨间简报 + 报告导出"]
+                      : ["Nightly Health Check framing", "Pad = guardian / Ring = specialist", "No real-time alarm positioning", "Morning brief + PDF export"]
+                    ).map((t, i) => (
+                      <div key={i} className="flex items-start gap-2">
+                        <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-foreground/5">
+                          <Check className="h-3.5 w-3.5" />
+                        </span>
+                        <span>{t}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div {...motionIn} className="space-y-3">
+              {copy.faq.map((f, idx) => (
+                <AccordionItem
+                  key={idx}
+                  q={f.q}
+                  a={f.a}
+                  open={faqOpen === idx}
+                  onToggle={() => setFaqOpen((v) => (v === idx ? -1 : idx))}
+                />
+              ))}
+
+              <div className="rounded-3xl border border-foreground/10 bg-background/60 p-6">
+                <div className="text-sm font-semibold">{lang === "zh" ? "想要更像“品牌官网”的下一步" : "Next to make it feel like a real brand site"}</div>
+                <div className="mt-2 text-sm text-foreground/70">
+                  {lang === "zh"
+                    ? "把占位插图替换成你的真实素材，并加入：对比图（仅垫 vs 垫+戒指）、样例报告截图、以及 2-3 条真实用户评价。"
+                    : "Replace placeholders with your assets, then add: comparison (Pad-only vs Pad+Ring), sample report screenshot, and 2–3 real testimonials."}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-foreground/10 py-10">
+        <Container>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3">
+              {assets.logo ? (
+                <img src={assets.logo} alt="Indexo Health logo" className="h-8 w-8 object-contain" />
+              ) : null}
+              <div className="text-sm font-semibold">{copy.nav.brand}</div>
+            </div>
+            <div className="text-xs text-foreground/60 max-w-3xl">{copy.footer.note}</div>
+          </div>
+        </Container>
+      </footer>
+    </div>
+  );
+}
