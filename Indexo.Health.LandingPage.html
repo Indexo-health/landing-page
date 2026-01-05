@@ -244,7 +244,7 @@ function Stat({ icon: Icon, label, value, hint }) {
 
 function FeatureLine({ icon: Icon, title, desc }) {
   return (
-    <div className="flex gap-3 rounded-2xl border border-foreground/10 bg-white/80 p-4">
+    <div className="flex gap-3 rounded-2xl border border-foreground/10 bg-white/80 p-4 shadow-sm">
       <div className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-brand/10 text-brand">
         <Icon className="h-5 w-5" />
       </div>
@@ -261,7 +261,7 @@ function AccordionItem({ q, a, open, onToggle }) {
     <button
       type="button"
       onClick={onToggle}
-      className="w-full rounded-2xl border border-foreground/10 bg-white/80 p-4 text-left transition hover:bg-brand/10"
+      className="w-full rounded-2xl border border-foreground/10 bg-white/80 p-4 text-left shadow-sm transition hover:bg-brand/10"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="space-y-1">
@@ -404,8 +404,17 @@ export default function LandingPageNightlyHealthCheck() {
         },
       ],
       footer: {
-        note:
-          "Disclaimer placeholder: This page is a marketing prototype. Replace all compliance-related claims (FDA/clinical/diagnosis) with your officially approved language.",
+        tagline: "Through the lens of Sleep",
+        contactLabel: "Contact",
+        contactEmail: "hello@indexo.health",
+        disclaimer:
+          "Indexo Health provides wellness insights and is not intended to diagnose, treat, cure, or prevent disease. If you have health concerns, consult a clinician.",
+        columns: [
+          { title: "Company", links: ["About", "Careers", "Blog"] },
+          { title: "Product", links: ["Download App", "Getting started", "Pricing"] },
+          { title: "Resources", links: ["FAQ", "Support", "Contact us"] },
+          { title: "Legal", links: ["Terms of Service", "Privacy Policy"] },
+        ],
       },
     };
 
@@ -515,7 +524,17 @@ export default function LandingPageNightlyHealthCheck() {
         },
       ],
       footer: {
-        note: "免责声明占位：请用正式合规文案替换此处内容。",
+        tagline: "通过睡眠透视健康",
+        contactLabel: "联系方式",
+        contactEmail: "hello@indexo.health",
+        disclaimer:
+          "Indexo Health 提供健康管理参考信息，并非医疗诊断或治疗用途。如有健康问题，请咨询专业医护人员。",
+        columns: [
+          { title: "公司", links: ["关于我们", "加入我们", "博客"] },
+          { title: "产品", links: ["下载 App", "上手指南", "价格方案"] },
+          { title: "资源", links: ["FAQ", "支持中心", "联系我们"] },
+          { title: "法律", links: ["服务条款", "隐私政策"] },
+        ],
       },
     };
 
@@ -899,13 +918,11 @@ export default function LandingPageNightlyHealthCheck() {
               </div>
             </motion.div>
 
-            <motion.div {...motionIn} className="rounded-3xl border border-foreground/10 bg-white/80 p-6 shadow-sm">
-              <div className="space-y-4">
-                <AppPreviewCard src={assets.appScreenshot} lang={lang} />
-                <div className="text-sm font-semibold">{lang === "zh" ? "醒来后的安心提醒" : "Certainty after you wake"}</div>
-              </div>
-              <div className="mt-4 grid gap-3">
-                <div className="rounded-2xl border border-foreground/10 bg-background/70 p-4">
+            <motion.div {...motionIn} className="space-y-4">
+              <AppPreviewCard src={assets.appScreenshot} lang={lang} />
+              <div className="text-sm font-semibold">{lang === "zh" ? "醒来后的安心提醒" : "Certainty after you wake"}</div>
+              <div className="grid gap-3">
+                <div className="rounded-2xl border border-foreground/10 bg-white/80 p-4 shadow-sm">
                   <div className="flex items-center gap-2 text-xs text-foreground/70">
                     <Shield className="h-4 w-4" />
                     {lang === "zh" ? "夜间风险提示" : "Nightly risk flags"}
@@ -914,7 +931,7 @@ export default function LandingPageNightlyHealthCheck() {
                     {lang === "zh" ? "清晰结论 + 下一步建议" : "Clear conclusions + next steps"}
                   </div>
                 </div>
-                <div className="rounded-2xl border border-foreground/10 bg-foreground/[0.03] p-4">
+                <div className="rounded-2xl border border-foreground/10 bg-white/80 p-4 shadow-sm">
                   <div className="flex items-center gap-2 text-xs text-foreground/70">
                     <Sparkles className="h-4 w-4" />
                     {lang === "zh" ? "家属同步" : "Share with family"}
@@ -923,7 +940,7 @@ export default function LandingPageNightlyHealthCheck() {
                     {lang === "zh" ? "异常时提醒家属" : "Notify trusted contacts"}
                   </div>
                 </div>
-                <div className="rounded-2xl border border-foreground/10 bg-background/70 p-4">
+                <div className="rounded-2xl border border-foreground/10 bg-white/80 p-4 shadow-sm">
                   <div className="flex items-center gap-2 text-xs text-foreground/70">
                     <FileText className="h-4 w-4" />
                     {lang === "zh" ? "医生报告" : "Doctor-ready report"}
@@ -1027,8 +1044,8 @@ export default function LandingPageNightlyHealthCheck() {
             <motion.div {...motionIn}>
               <SectionTitle eyebrow={copy.proof.eyebrow} title={copy.proof.title} subtitle={copy.proof.sub} />
 
-              <div className="mt-6 grid gap-3">
-                <div className="rounded-3xl border border-foreground/10 bg-background/60 p-6">
+              <div className="mt-6 grid gap-4">
+                <div className="rounded-3xl border border-foreground/10 bg-white/80 p-6 shadow-sm">
                   <div className="flex items-center gap-2 text-sm font-semibold">
                     <BadgeCheck className="h-5 w-5 text-foreground/70" />
                     {lang === "zh" ? "你需要补齐的关键信息（占位）" : "What you still need to fill in (placeholders)"}
@@ -1040,7 +1057,7 @@ export default function LandingPageNightlyHealthCheck() {
                   </ul>
                 </div>
 
-                <div className="rounded-3xl border border-foreground/10 bg-foreground/[0.03] p-6">
+                <div className="rounded-3xl border border-foreground/10 bg-white/80 p-6 shadow-sm">
                   <div className="text-sm font-semibold">{lang === "zh" ? "我已经按你的内容实现了" : "Already implemented from your brief"}</div>
                   <div className="mt-3 grid gap-2 sm:grid-cols-2 text-sm text-foreground/70">
                     {(lang === "zh"
@@ -1059,7 +1076,7 @@ export default function LandingPageNightlyHealthCheck() {
               </div>
             </motion.div>
 
-            <motion.div {...motionIn} className="space-y-3">
+            <motion.div {...motionIn} className="space-y-4">
               {copy.faq.map((f, idx) => (
                 <AccordionItem
                   key={idx}
@@ -1070,7 +1087,7 @@ export default function LandingPageNightlyHealthCheck() {
                 />
               ))}
 
-              <div className="rounded-3xl border border-foreground/10 bg-background/60 p-6">
+              <div className="rounded-3xl border border-foreground/10 bg-white/80 p-6 shadow-sm">
                 <div className="text-sm font-semibold">{lang === "zh" ? "想要更像“品牌官网”的下一步" : "Next to make it feel like a real brand site"}</div>
                 <div className="mt-2 text-sm text-foreground/70">
                   {lang === "zh"
@@ -1084,16 +1101,40 @@ export default function LandingPageNightlyHealthCheck() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-foreground/10 py-10">
+      <footer className="border-t border-foreground/10 py-12">
         <Container>
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-3">
-              {assets.logo ? (
-                <img src={assets.logo} alt="Indexo Health logo" className="h-8 w-8 object-contain" />
-              ) : null}
-              <div className="text-sm font-semibold">{copy.nav.brand}</div>
+          <div className="grid gap-10 lg:grid-cols-[1.2fr_2fr]">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                {assets.logo ? (
+                  <img src={assets.logo} alt="Indexo Health logo" className="h-10 w-auto object-contain" />
+                ) : null}
+                <div className="text-sm font-semibold">{copy.nav.brand}</div>
+              </div>
+              <div className="text-sm text-foreground/70">{copy.footer.tagline}</div>
+              <div className="text-sm text-foreground/70">
+                {copy.footer.contactLabel}:{" "}
+                <a href={`mailto:${copy.footer.contactEmail}`} className="font-semibold text-foreground hover:text-brand">
+                  {copy.footer.contactEmail}
+                </a>
+              </div>
+              <div className="text-xs text-foreground/60">{copy.footer.disclaimer}</div>
             </div>
-            <div className="text-xs text-foreground/60 max-w-3xl">{copy.footer.note}</div>
+
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {copy.footer.columns.map((col, i) => (
+                <div key={i} className="space-y-3">
+                  <div className="text-sm font-semibold">{col.title}</div>
+                  <div className="grid gap-2 text-sm text-foreground/70">
+                    {col.links.map((link, idx) => (
+                      <a key={idx} href="#" className="hover:text-brand">
+                        {link}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </Container>
       </footer>
