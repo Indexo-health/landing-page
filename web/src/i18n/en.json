@@ -1,0 +1,287 @@
+{
+  "lang": "en",
+  "dir": "ltr",
+  "nav": {
+    "tag": "Through the lens of Sleep",
+    "home": "Home",
+    "about": "About",
+    "blog": "Blog"
+  },
+  "cta": {
+    "primary": "Get the Nightly Health Check"
+  },
+  "hero": {
+    "pill1": "The Right to Know",
+    "pill2": "Certainty, not anxiety",
+    "pill3": "Nightly Health Check",
+    "headline": "The Most Honest Health Check Happens Every Night.",
+    "sub": "Sleep reveals risks you can’t feel while awake. Our dual-sensor system listens all night and delivers a clear morning brief.",
+    "ctaPrimary": "Reveal My Nightly Health",
+    "ctaSecondary": "See how it works",
+    "slogan": "Your Health Speaks When You Sleep. We Listen.",
+    "side": {
+      "systemLabel": "System",
+      "systemValue": "Dual sensors: Pad + Ring",
+      "careLabel": "Care",
+      "careValue": "Morning brief + exportable report"
+    }
+  },
+  "trust": {
+    "a": "Undisturbed sleep",
+    "b": "Dual sensors (Pad + Ring)",
+    "c": "Morning brief + PDF"
+  },
+  "problem": {
+    "eyebrow": "The Problem",
+    "title": "Nighttime Risks Often Go Unnoticed.",
+    "sub": "Breathing pauses and oxygen drops happen silently. You wake up tired, but the cause stays hidden.",
+    "stats": [
+      { "label": "Night anomalies are invisible", "value": "Unseen", "hint": "They happen quietly" },
+      { "label": "You wake up exhausted", "value": "No answers", "hint": "The cause is unclear" },
+      { "label": "Family worries without proof", "value": "No proof", "hint": "Only guesses" }
+    ],
+    "scenarios": [
+      "Did I stop breathing during the night?",
+      "Why am I still exhausted after 8 hours?",
+      "Is my heart really resting at night?"
+    ]
+  },
+  "solution": {
+    "eyebrow": "The Solution",
+    "title": "One System. Two Roles. Full Coverage.",
+    "sub": "Pad is always on. Ring is for precision checks when you need them.",
+    "pad": {
+      "title": "The Pad — The Silent Guardian",
+      "subtitle": "Daily, passive monitoring",
+      "bullets": [
+        "Effortless monitoring with no wearables.",
+        "Builds your nightly baseline over time."
+      ],
+      "footer": "Best for everyday monitoring",
+      "see": {
+        "label": "You’ll see",
+        "items": [
+          { "label": "HR", "value": "Trend" },
+          { "label": "RR", "value": "Baseline" },
+          { "label": "Sleep", "value": "Behavior" }
+        ]
+      }
+    },
+    "ring": {
+      "title": "The Ring — The Precision Specialist",
+      "subtitle": "Precision checks when needed",
+      "bullets": [
+        "Deep dives when you want answers.",
+        "Medical-grade oxygen insights and apnea risk."
+      ],
+      "footer": "Best for targeted checks",
+      "see": {
+        "label": "You’ll see",
+        "items": [
+          { "label": "SpO₂", "value": "Drops" },
+          { "label": "ODI", "value": "Pattern" },
+          { "label": "Apnea", "value": "Risk" }
+        ]
+      }
+    },
+    "compare": [
+      {
+        "label": "Pad",
+        "title": "No wearables, always on",
+        "desc": "Under-mattress sensing for nightly trends."
+      },
+      {
+        "label": "Ring",
+        "title": "Precision SpO₂ when needed",
+        "desc": "Wear for deeper oxygen and apnea insights."
+      },
+      {
+        "label": "Outcome",
+        "title": "Higher adherence, shared peace of mind",
+        "desc": "Zero burden daily, precise checks when needed."
+      }
+    ]
+  },
+  "value": {
+    "eyebrow": "The Value",
+    "title": "Wake Up to Certainty.",
+    "sub": "We surface risk signals, explain them clearly, and notify the people who should know.",
+    "grid": [
+      { "title": "Sleep Quality", "desc": "Know whether your sleep was restorative." },
+      { "title": "Breathing & Oxygen", "desc": "See apnea‑risk and oxygen patterns." },
+      { "title": "Heart & Recovery", "desc": "Understand nightly strain and recovery." },
+      { "title": "Family Peace of Mind", "desc": "Share a clear brief when it matters." }
+    ],
+    "features": [
+      { "title": "Risk Signals You Can Act On", "desc": "Clear guidance instead of raw charts." },
+      { "title": "Share with Family or Clinicians", "desc": "Morning brief plus PDF for follow-up." },
+      { "title": "Long‑Term Trends", "desc": "See changes over weeks, not just one night." }
+    ],
+    "evidence": "Evidence wall"
+  },
+  "preview": {
+    "eyebrow": "AI Preview",
+    "cardLabel": "Morning brief preview",
+    "title": "Ask. We explain. We suggest next steps.",
+    "sub": "A short morning conversation that turns nightly signals into decisions.",
+    "youAsk": "You ask",
+    "weRespond": "We respond",
+    "chats": [
+      {
+        "q": "Did anything unusual happen last night?",
+        "a": "We detected frequent oxygen drops between 2–4am. This pattern may indicate apnea risk. Consider a follow‑up check."
+      },
+      {
+        "q": "Why am I tired after 8 hours?",
+        "a": "Your sleep was long but fragmented. We saw 9 awakenings and elevated heart strain."
+      },
+      {
+        "q": "Can my family get a summary?",
+        "a": "Yes. You can share the Morning Brief and PDF report with trusted contacts."
+      }
+    ],
+    "certaintyTitle": "Certainty after you wake",
+    "certaintyItems": [
+      { "label": "Nightly risk flags", "desc": "Clear conclusions + next steps" },
+      { "label": "Share with family", "desc": "Notify trusted contacts" },
+      { "label": "Doctor-ready report", "desc": "Morning brief + PDF export" }
+    ]
+  },
+  "model": {
+    "eyebrow": "How It Works",
+    "title": "Morning Health Brief Flow.",
+    "sub": "No alarms at night. Wake up to a clear brief and next steps.",
+    "steps": [
+      { "title": "Sleep", "desc": "Sleep naturally, no disruption." },
+      { "title": "Analyze", "desc": "We review anomalies and context." },
+      { "title": "Brief", "desc": "Get your morning brief + PDF." }
+    ],
+    "pricingTitle": "1st Year of Premium Care Included",
+    "pricingBadge": "Premium Care",
+    "pricingDesc": "Unlimited history storage, advanced risk briefs, and doctor-ready PDF export. (Replace with your final plan details.)",
+    "includesLabel": "Includes",
+    "includes": ["Unlimited history", "Advanced risk briefs", "Doctor-ready PDF", "Trends & baseline"],
+    "nextStepTitle": "Next step",
+    "nextStepBody": "Connect your CTA, form, or purchase link here (e.g., Founder call / Trial application / Buy now).",
+    "cta": "Get the Nightly Health Check",
+    "prototypeNote": "(Prototype: button does not navigate yet)"
+  },
+  "proof": {
+    "eyebrow": "Trust & FAQ",
+    "title": "Built for Calm, Actionable Confidence.",
+    "sub": "Add your real clinical & compliance statements here — and any validation, partners, or certifications you’re allowed to claim.",
+    "placeholdersTitle": "What you still need to fill in (placeholders)",
+    "placeholders": ["Product naming and pricing", "Compliance copy and allowed claims", "Trust signals (data/partners/testimonials)"],
+    "implementedTitle": "Already implemented from your brief",
+    "implemented": ["Nightly Health Check framing", "Pad = guardian / Ring = specialist", "No real-time alarm positioning", "Morning brief + PDF export"],
+    "nextBrandTitle": "Next to make it feel like a real brand site",
+    "nextBrandBody": "Replace placeholders with your assets, then add: comparison (Pad-only vs Pad+Ring), sample report screenshot, and 2–3 real testimonials."
+  },
+  "faq": [
+    {
+      "q": "Does it have a real-time alarm?",
+      "a": "No. We prioritize undisturbed sleep. You’ll receive a safety check report the moment you wake up, so you can act without being woken up."
+    },
+    {
+      "q": "Is this a medical device?",
+      "a": "Use your approved compliance wording here. Typical framing: ‘Helpful for screening and sharing objective data with clinicians.’ Avoid making diagnostic claims unless cleared/approved."
+    },
+    {
+      "q": "Do I need to wear the ring every night?",
+      "a": "Not necessarily. The pad supports everyday monitoring. Use the ring when you want more precise oxygen and apnea-risk insights."
+    }
+  ],
+  "device": {
+    "brief": "Morning Health Brief",
+    "check": "Nightly Health Check",
+    "lastNight": "Last Night: Stable",
+    "lastNightDesc": "No signs of apnea detected.",
+    "hr": "HR",
+    "rr": "RR",
+    "spo2": "SpO₂",
+    "hrHint": "bpm • restful",
+    "rrHint": "rpm • steady",
+    "spo2Hint": "% • normal",
+    "insights": "Plain‑English insights",
+    "pdf": "Doctor‑ready PDF"
+  },
+  "heroScene": {
+    "scene": "A gentle, undisturbed night",
+    "hint": "Pad under mattress • Ring on nightstand"
+  },
+  "footer": {
+    "tagline": "Through the lens of Sleep",
+    "contactLabel": "Contact",
+    "contactEmail": "hello@indexo.health",
+    "disclaimer": "Indexo Health provides wellness insights and is not intended to diagnose, treat, cure, or prevent disease. If you have health concerns, consult a clinician.",
+    "languageLabel": "Language",
+    "languages": [
+      { "label": "English", "href": "/en" },
+      { "label": "简体中文", "href": "/zh" }
+    ],
+    "columns": [
+      { "title": "Company", "links": ["About", "Blog"] },
+      { "title": "Product", "links": ["Getting started", "FAQ"] },
+      { "title": "Legal", "links": ["Terms of Service", "Privacy Policy"] }
+    ]
+  },
+  "about": {
+    "eyebrow": "ABOUT US",
+    "title": "Through the Lens of Sleep",
+    "intro": "We believe sleep reveals the most honest signals of health. Our mission is to help families see risk earlier and wake up with clarity, not anxiety.",
+    "ctaLabel": "Read our notes",
+    "focusTitle": "OUR FOCUS",
+    "focus": [
+      { "label": "Nightly health checks", "value": "Every night" },
+      { "label": "Undisturbed sleep", "value": "No alarms" },
+      { "label": "Family peace of mind", "value": "Built in" }
+    ],
+    "sections": [
+      { "eyebrow": "Mission", "title": "Make the invisible visible.", "body": "We translate nightly signals into clear, actionable insights that help you decide what to do next." },
+      { "eyebrow": "Principles", "title": "Quiet care, clear guidance.", "body": "No alarms at night, no confusing charts in the morning — just a calm brief you can trust and share." },
+      { "eyebrow": "For families", "title": "Confidence for caregivers.", "body": "Our system is designed for real life: effortless monitoring with deeper checks when needed." },
+      { "eyebrow": "Compliance", "title": "Built with care and responsibility.", "body": "We provide wellness insights and encourage users to consult clinicians for medical decisions." }
+    ]
+  },
+  "blog": {
+    "title": "Notes on Sleep, Health, and Calm Care",
+    "intro": "Product updates, health insights, and design decisions behind Indexo Health.",
+    "featured": "FEATURED",
+    "read": "Read",
+    "readNow": "Read now",
+    "backToBlog": "Back to Blog",
+    "notFound": "Post not found.",
+    "posts": [
+      {
+        "slug": "nightly-health-check",
+        "tag": "Insights",
+        "title": "Why the most honest health check happens at night",
+        "excerpt": "Sleep reveals signals you can’t feel while awake. Here’s how we turn them into clarity.",
+        "body": [
+          "Sleep is when the body tells the truth. Breathing pauses, oxygen dips, and irregular rhythms often happen silently while we rest.",
+          "Our goal is to surface those signals in plain language and give you a simple morning brief you can act on."
+        ]
+      },
+      {
+        "slug": "pad-ring-system",
+        "tag": "Product",
+        "title": "Pad + Ring: one system, two roles",
+        "excerpt": "Why we separate everyday monitoring from precision checks — and why that matters.",
+        "body": [
+          "The pad is effortless and always on. The ring is for precision checks when you want deeper oxygen insights.",
+          "Together, they balance comfort and accuracy — which improves long‑term adherence for real families."
+        ]
+      },
+      {
+        "slug": "family-peace-of-mind",
+        "tag": "Care",
+        "title": "Designing for families and caregivers",
+        "excerpt": "How we build a calmer experience for people who want clarity, not alarms.",
+        "body": [
+          "We design for calm, not alarms. Families need clarity without disruption.",
+          "That’s why we focus on morning briefs, shared reports, and easy next steps."
+        ]
+      }
+    ]
+  }
+}

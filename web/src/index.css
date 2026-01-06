@@ -23,3 +23,7 @@ body {
 .font-display {
   font-family: "Fraunces", "Noto Serif SC", serif;
 }
+
+html[dir="rtl"] {
+  direction: rtl;
+}

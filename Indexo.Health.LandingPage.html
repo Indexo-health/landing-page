@@ -14,6 +14,7 @@ import {
   BadgeCheck,
   HelpCircle,
 } from "lucide-react";
+import SiteHeader from "./components/SiteHeader.jsx";
 
 const cx = (...classes) => classes.filter(Boolean).join(" ");
 
@@ -277,7 +278,12 @@ function AccordionItem({ q, a, open, onToggle }) {
 }
 
 export default function LandingPageNightlyHealthCheck() {
-  const [lang, setLang] = useState("en");
+  const [lang, setLang] = useState(() => {
+    if (typeof navigator !== "undefined" && navigator.language) {
+      return navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en";
+    }
+    return "en";
+  });
   const [faqOpen, setFaqOpen] = useState(0);
   const assets = {
     logo: "/assets/indexohealth_logo_400.png",
@@ -347,6 +353,12 @@ export default function LandingPageNightlyHealthCheck() {
         title: "Wake Up to Certainty.",
         sub:
           "We surface risk signals, explain them clearly, and notify the people who should know.",
+        grid: [
+          { title: "Sleep Quality", desc: "Know whether your sleep was restorative." },
+          { title: "Breathing & Oxygen", desc: "See apnea‑risk and oxygen patterns." },
+          { title: "Heart & Recovery", desc: "Understand nightly strain and recovery." },
+          { title: "Family Peace of Mind", desc: "Share a clear brief when it matters." },
+        ],
         features: [
           {
             icon: BadgeCheck,
@@ -362,6 +374,25 @@ export default function LandingPageNightlyHealthCheck() {
             icon: Activity,
             title: "Long‑Term Trends",
             desc: "See changes over weeks, not just one night.",
+          },
+        ],
+      },
+      preview: {
+        eyebrow: "AI Preview",
+        title: "Ask. We explain. We suggest next steps.",
+        sub: "A short morning conversation that turns nightly signals into decisions.",
+        chats: [
+          {
+            q: "Did anything unusual happen last night?",
+            a: "We detected frequent oxygen drops between 2–4am. This pattern may indicate apnea risk. Consider a follow‑up check.",
+          },
+          {
+            q: "Why am I tired after 8 hours?",
+            a: "Your sleep was long but fragmented. We saw 9 awakenings and elevated heart strain.",
+          },
+          {
+            q: "Can my family get a summary?",
+            a: "Yes. You can share the Morning Brief and PDF report with trusted contacts.",
           },
         ],
       },
@@ -471,6 +502,12 @@ export default function LandingPageNightlyHealthCheck() {
         eyebrow: "价值",
         title: "在“确定的安心”中醒来。",
         sub: "我们识别风险、清晰解释，并提醒你和家属。",
+        grid: [
+          { title: "睡眠质量", desc: "看清是否真正修复。"},
+          { title: "呼吸与血氧", desc: "识别呼吸暂停风险。"},
+          { title: "心脏与恢复", desc: "理解夜间负荷与恢复。"},
+          { title: "家属安心", desc: "关键时刻共享结论。"},
+        ],
         features: [
           {
             icon: BadgeCheck,
@@ -486,6 +523,25 @@ export default function LandingPageNightlyHealthCheck() {
             icon: Activity,
             title: "长期趋势追踪",
             desc: "看清数周变化，而非单晚波动。",
+          },
+        ],
+      },
+      preview: {
+        eyebrow: "AI 预览",
+        title: "你提问，我们解释，并给出下一步。",
+        sub: "一段晨间对话，把夜间信号变成清晰结论。",
+        chats: [
+          {
+            q: "昨夜有没有异常？",
+            a: "2–4 点出现多次血氧下降，模式提示呼吸风险，建议进一步评估。",
+          },
+          {
+            q: "为什么睡够了还是累？",
+            a: "睡眠被多次打断，心率负荷偏高，可能影响恢复。",
+          },
+          {
+            q: "家人能收到简报吗？",
+            a: "可以共享晨间简报与 PDF 报告给家属。",
           },
         ],
       },
@@ -574,47 +630,12 @@ export default function LandingPageNightlyHealthCheck() {
       {/* Top gradient */}
       <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[520px] bg-gradient-to-b from-brand/15 via-brand-2/10 to-transparent" />
 
-      {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-foreground/10 bg-background/90 backdrop-blur">
-        <Container>
-          <div className="flex h-20 items-center justify-between">
-            <div className="flex items-center gap-3">
-              <a href="#top" className="inline-flex items-center gap-3">
-                <div className="inline-flex items-center justify-center overflow-hidden rounded-2xl border border-foreground/10 bg-white/80 px-3 py-2 shadow-sm">
-                  {assets.logo ? (
-                    <img src={assets.logo} alt="Indexo Health logo" className="h-12 w-auto object-contain" />
-                  ) : (
-                    <Moon className="h-6 w-6 text-foreground/70" />
-                  )}
-                </div>
-                <div className="text-sm text-foreground/70">{copy.nav.tag}</div>
-              </a>
-            </div>
-
-            <div className="hidden items-center gap-6 text-sm text-foreground/70 md:flex">
-              <a href="#problem" className="hover:text-brand">{lang === "zh" ? "痛点" : "Problem"}</a>
-              <a href="#solution" className="hover:text-brand">{lang === "zh" ? "方案" : "Solution"}</a>
-              <a href="#value" className="hover:text-brand">{lang === "zh" ? "安心" : "Certainty"}</a>
-              <a href="#pricing" className="hover:text-brand">{lang === "zh" ? "服务" : "Care"}</a>
-              <button
-                type="button"
-                onClick={() => setLang((v) => (v === "en" ? "zh" : "en"))}
-                className="inline-flex items-center rounded-xl border border-foreground/10 bg-white/80 px-3 py-2 text-xs font-medium hover:bg-brand/10"
-              >
-                {lang === "zh" ? "EN" : "中文"}
-              </button>
-            </div>
-
-            <a
-              href="#pricing"
-              className="inline-flex items-center gap-2 rounded-2xl bg-brand px-4 py-2 text-sm font-semibold text-white shadow hover:bg-brand/90"
-            >
-              {copy.model.cta}
-              <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
-        </Container>
-      </header>
+      <SiteHeader
+        logoSrc={assets.logo}
+        tagline={copy.nav.tag}
+        ctaLabel={copy.model.cta}
+        ctaHref="#pricing"
+      />
 
       {/* Hero */}
       <section className="relative overflow-hidden py-14 sm:py-20">
@@ -911,6 +932,14 @@ export default function LandingPageNightlyHealthCheck() {
           <div className="grid gap-10 lg:grid-cols-2">
             <motion.div {...motionIn}>
               <SectionTitle eyebrow={copy.value.eyebrow} title={copy.value.title} subtitle={copy.value.sub} />
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                {copy.value.grid.map((item, i) => (
+                  <div key={i} className="rounded-3xl border border-foreground/10 bg-white/80 p-5 shadow-sm">
+                    <div className="text-sm font-semibold">{item.title}</div>
+                    <div className="mt-2 text-sm text-foreground/70">{item.desc}</div>
+                  </div>
+                ))}
+              </div>
               <div className="mt-6 space-y-3">
                 {copy.value.features.map((f, i) => (
                   <FeatureLine key={i} icon={f.icon} title={f.title} desc={f.desc} />
@@ -919,10 +948,49 @@ export default function LandingPageNightlyHealthCheck() {
             </motion.div>
 
             <motion.div {...motionIn} className="space-y-4">
+              <div className="rounded-3xl border border-foreground/10 bg-white/80 p-4 shadow-sm">
+                <div className="text-xs text-foreground/70">{lang === "zh" ? "证据墙" : "Evidence wall"}</div>
+                <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                  {[
+                    assets.appScreenshot,
+                    assets.padRingCombo,
+                    assets.ringOnFinger,
+                    assets.padUnderMattressAlt,
+                  ].filter(Boolean).map((src, idx) => (
+                    <div key={idx} className="overflow-hidden rounded-2xl border border-foreground/10 bg-white">
+                      <img src={src} alt="Evidence" className="h-40 w-full object-cover" />
+                    </div>
+                  ))}
+                </div>
+              </div>
               <AppPreviewCard src={assets.appScreenshot} lang={lang} />
+            </motion.div>
+          </div>
+        </Container>
+      </section>
+
+      {/* AI Preview */}
+      <section className="py-14 sm:py-20">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr]">
+            <motion.div {...motionIn}>
+              <SectionTitle eyebrow={copy.preview.eyebrow} title={copy.preview.title} subtitle={copy.preview.sub} />
+              <div className="mt-6 space-y-4">
+                {copy.preview.chats.map((c, i) => (
+                  <div key={i} className="rounded-3xl border border-foreground/10 bg-white/80 p-5 shadow-sm">
+                    <div className="text-xs text-foreground/60">{lang === "zh" ? "你问" : "You ask"}</div>
+                    <div className="mt-2 text-sm font-semibold">{c.q}</div>
+                    <div className="mt-4 text-xs text-foreground/60">{lang === "zh" ? "系统答复" : "We respond"}</div>
+                    <div className="mt-2 text-sm text-foreground/70">{c.a}</div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div {...motionIn} className="rounded-3xl border border-foreground/10 bg-white/80 p-6 shadow-sm">
               <div className="text-sm font-semibold">{lang === "zh" ? "醒来后的安心提醒" : "Certainty after you wake"}</div>
-              <div className="grid gap-3">
-                <div className="rounded-2xl border border-foreground/10 bg-white/80 p-4 shadow-sm">
+              <div className="mt-4 grid gap-3">
+                <div className="rounded-2xl border border-foreground/10 bg-white p-4">
                   <div className="flex items-center gap-2 text-xs text-foreground/70">
                     <Shield className="h-4 w-4" />
                     {lang === "zh" ? "夜间风险提示" : "Nightly risk flags"}
@@ -931,7 +999,7 @@ export default function LandingPageNightlyHealthCheck() {
                     {lang === "zh" ? "清晰结论 + 下一步建议" : "Clear conclusions + next steps"}
                   </div>
                 </div>
-                <div className="rounded-2xl border border-foreground/10 bg-white/80 p-4 shadow-sm">
+                <div className="rounded-2xl border border-foreground/10 bg-white p-4">
                   <div className="flex items-center gap-2 text-xs text-foreground/70">
                     <Sparkles className="h-4 w-4" />
                     {lang === "zh" ? "家属同步" : "Share with family"}
@@ -940,7 +1008,7 @@ export default function LandingPageNightlyHealthCheck() {
                     {lang === "zh" ? "异常时提醒家属" : "Notify trusted contacts"}
                   </div>
                 </div>
-                <div className="rounded-2xl border border-foreground/10 bg-white/80 p-4 shadow-sm">
+                <div className="rounded-2xl border border-foreground/10 bg-white p-4">
                   <div className="flex items-center gap-2 text-xs text-foreground/70">
                     <FileText className="h-4 w-4" />
                     {lang === "zh" ? "医生报告" : "Doctor-ready report"}
@@ -1118,6 +1186,13 @@ export default function LandingPageNightlyHealthCheck() {
                   {copy.footer.contactEmail}
                 </a>
               </div>
+              <button
+                type="button"
+                onClick={() => setLang((v) => (v === "en" ? "zh" : "en"))}
+                className="inline-flex w-fit items-center rounded-xl border border-foreground/10 bg-white/80 px-3 py-2 text-xs font-semibold hover:bg-brand/10"
+              >
+                {lang === "zh" ? "切换到 English" : "切换到 中文"}
+              </button>
               <div className="text-xs text-foreground/60">{copy.footer.disclaimer}</div>
             </div>
 
@@ -1126,11 +1201,33 @@ export default function LandingPageNightlyHealthCheck() {
                 <div key={i} className="space-y-3">
                   <div className="text-sm font-semibold">{col.title}</div>
                   <div className="grid gap-2 text-sm text-foreground/70">
-                    {col.links.map((link, idx) => (
-                      <a key={idx} href="#" className="hover:text-brand">
-                        {link}
-                      </a>
-                    ))}
+                    {col.links.map((link, idx) => {
+                      const map = {
+                        About: "/about-us",
+                        Blog: "/blog",
+                        "About us": "/about-us",
+                        "Getting started": "https://docs.indexo.health/getting-started",
+                        "Terms of Service": "https://docs.indexo.health/terms-of-service",
+                        "Privacy Policy": "https://docs.indexo.health/privacy-policy",
+                        FAQ: "https://docs.indexo.health/faq",
+                        Support: "https://docs.indexo.health/getting-started",
+                        "Contact us": "mailto:hello@indexo.health",
+                        "下载 App": "#",
+                        "上手指南": "https://docs.indexo.health/getting-started",
+                        "服务条款": "https://docs.indexo.health/terms-of-service",
+                        "隐私政策": "https://docs.indexo.health/privacy-policy",
+                        "支持中心": "https://docs.indexo.health/getting-started",
+                        "联系我们": "mailto:hello@indexo.health",
+                        "关于我们": "/about-us",
+                        "博客": "/blog",
+                      };
+                      const href = map[link] || "#";
+                      return (
+                        <a key={idx} href={href} className="hover:text-brand">
+                          {link}
+                        </a>
+                      );
+                    })}
                   </div>
                 </div>
               ))}

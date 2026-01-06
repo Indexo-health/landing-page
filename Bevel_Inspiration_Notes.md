@@ -54,11 +54,78 @@
 4. **重复 CTA 但样式一致**：
    - Hero / 中段 / 页尾三处 CTA 保持同一视觉体系。
 
+## 站点与内容规划建议（关于 About / Blog / 文档）
+### 是否新增 About / Blog？
+**建议新增**，原因：  
+- About 用于建立世界观、价值观与专业可信度（信任资产）。  
+- Blog 用于持续输出内容（产品迭代、健康科普、研究引用），形成长期 SEO 与可信内容库。  
+
+### 部署方式建议（结合 Vercel 免费托管）
+**推荐方案：在现有 Vercel 上直接创建 About / Blog 页面**  
+- **优点**：统一品牌与视觉、发布最便捷、无需引入外部平台。  
+- **适合**：内容量较少或更新频率低（每月 1–2 篇）。  
+
+**对比 Bevel（Cloudflare + Webflow）的优势**  
+- **Webflow**：可视化编辑、非工程人员维护、更新快。  
+- **Cloudflare**：CDN/安全/缓存更强，但对我们当前阶段不是刚需。  
+- **劣势**：需要额外平台与费用，维护分散。  
+结论：**我们直接在 Vercel 发布更便捷，等内容规模变大再迁移**。  
+
+### 文档与法务页面建议（FAQ / Getting Started / Privacy / Terms / Release Notes）
+**推荐方案：使用在线文档平台（独立维护）**  
+- **优点**：主站与文档分离，更新更独立，非工程同事可直接维护。  
+- **可选平台**：  
+  - **Craft.do**（成本较低，上手快，适合快速上线）  
+  - **Notion**（编辑体验好，结合自定义域名使用）  
+  - **Coda**（结构化更强，适合复杂内容）  
+- **不建议 Mintlify 付费版**：成本高，当前阶段投入产出不匹配。  
+
+**落地结构建议**  
+- `docs.yourdomain.com` 指向文档站  
+- 文档站包含：FAQ / Getting Started / Privacy Policy / Terms / Release Notes  
+
+**推荐落地路径（简化）**  
+1) **主站**（Vercel）：about-us / blog / landing / 联系方式  
+2) **文档站**（Craft 或 Notion）：FAQ / Getting Started / Privacy / Terms / Release Notes  
+3) **统一入口**：主站页脚链接到 docs 子域名  
 ## 建议的下一步
 - 若你认可上述方向，我可以按优先级逐项落地：
   1) 先重构 Hero 与段落密度
   2) 再统一卡片与留白
   3) 最后补齐信任与转化模块
+
+## 执行计划（建议）
+### Phase 0：内容与信息准备
+1) 明确 About 页面核心叙事（使命/原则/团队/合规立场）。
+2) 明确 Blog 初期主题与频率（例如每月 1–2 篇）。
+3) 收集可公开的信任材料（数据、合作、媒体、用户证言）。
+
+### Phase 1：站点结构与路由
+1) 在主站新增 `/about-us` 页面。
+2) 在主站新增 `/blog` 列表页（可先是占位与结构）。
+3) 预留 `/blog/[slug]` 文章模板（可先用假数据）。
+4) 页脚与导航新增 About / Blog / Docs / Contact 入口。
+
+### Phase 2：核心页面改造（Landing）
+1) 重构 Hero：更强主张 + 单 CTA + 视觉完整呈现。
+2) 调整信息架构：Problem / Solution / Value 分离清晰。
+3) 建立 2x2 价值四宫格 + 界面证据墙。
+4) 加入 AI 对话预览（2–3 条示例）。
+
+### Phase 3：视觉统一
+1) 统一卡片样式（圆角/边框/阴影/留白）。
+2) 统一字体层级与图标风格。
+3) 统一截图呈现（手机框/角度/背景）。
+
+### Phase 4：信任与转化
+1) 引入社媒链接（Instagram / X / Reddit / YouTube / Facebook / Discord）。
+2) 增加背书或评价模块（2–3 条）。
+3) 完善合规文案与免责声明。
+
+### Phase 5：文档站
+1) 选定文档平台（建议 Craft 或 Notion）。
+2) 搭建 docs 子域名并发布 FAQ / Getting Started / Privacy / Terms / Release Notes。
+3) 主站页脚链接到 docs 子域名。
 
 ---
 
