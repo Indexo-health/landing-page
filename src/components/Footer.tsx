@@ -10,7 +10,7 @@ export default function Footer() {
           <img
             src="/images/Indexo_health_Logo_black.png"
             alt="Indexo Health"
-            className="h-8 w-auto brightness-0 invert"
+            className="h-8 w-auto self-start invert mix-blend-screen"
           />
           <p className="text-gray-400 text-sm leading-relaxed">
             {t('footer.desc')}

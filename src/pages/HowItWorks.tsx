@@ -22,7 +22,7 @@ export default function HowItWorks() {
     <div className="flex flex-col w-full bg-white">
       {/* Hero Section */}
       <section className="relative bg-white pt-16 pb-0 lg:pt-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-100 via-white via-40% to-orange-200 z-0 pointer-events-none opacity-100"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-100 via-white via-40% to-orange-200 z-0 pointer-events-none"></div>
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-10 lg:px-16 relative z-10">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-6">
 
@@ -61,8 +61,8 @@ export default function HowItWorks() {
               <div className="relative w-full">
                 <img
                   alt="Indexo Health medical team reviewing sleep monitoring data with patient"
-                  className="w-full h-auto object-contain drop-shadow-2xl"
-                  src="/images/How_it_works_hero_pic.png"
+                  className="w-full h-auto object-contain"
+                  src="/images/How_it_works_hero_nobg.png"
                   style={{
                     maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
                     WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
@@ -109,8 +109,8 @@ export default function HowItWorks() {
             <div className="bg-[linear-gradient(135deg,#ffffff_0%,#fcfcfc_100%)] rounded-[24px] border border-surface-border p-8 flex flex-col items-center hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500 shadow-card group overflow-hidden relative ring-1 ring-surface-border/50">
               <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-brand-navy to-brand-teal opacity-80"></div>
               <div className="relative w-full h-72 mb-8 rounded-2xl overflow-hidden bg-background-subtle flex items-center justify-center border border-surface-border/50 shadow-inner">
-                <img alt="Indexo Health under-mattress fiber optic sleep sensor placed beneath mattress" className="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out" src="/images/sensor_under_mattress.jpg" />
-                <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-transparent flex items-end justify-center pb-6">
+                <img alt="Indexo Health under-mattress fiber optic sleep sensor placed beneath mattress" className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out" src="/images/sensor_under_mattress.jpg" />
+                <div className="absolute bottom-4 left-0 right-0 flex justify-center">
                   <span className="text-brand-teal font-bold text-xs uppercase tracking-widest bg-white/95 px-5 py-2 rounded-full backdrop-blur-xl border border-brand-teal/20 shadow-sm">{t('hiw.hw1.badge')}</span>
                 </div>
               </div>
@@ -125,8 +125,8 @@ export default function HowItWorks() {
             <div className="bg-[linear-gradient(135deg,#ffffff_0%,#fcfcfc_100%)] rounded-[24px] border border-surface-border p-8 flex flex-col items-center hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500 shadow-card group overflow-hidden relative ring-1 ring-surface-border/50">
               <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-brand-teal to-brand-peach opacity-80"></div>
               <div className="relative w-full h-72 mb-8 rounded-2xl overflow-hidden bg-background-subtle flex items-center justify-center border border-surface-border/50 shadow-inner">
-                <img alt="Indexo Health SpO2 pulse oximetry ring sensor worn on finger during sleep" className="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out" src="/images/SpO2_ring_on_finger.JPG" />
-                <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-transparent flex items-end justify-center pb-6">
+                <img alt="Indexo Health SpO2 pulse oximetry ring sensor worn on finger during sleep" className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out" src="/images/SpO2_ring_on_finger.JPG" />
+                <div className="absolute bottom-4 left-0 right-0 flex justify-center">
                   <span className="text-brand-orange font-bold text-xs uppercase tracking-widest bg-white/95 px-5 py-2 rounded-full backdrop-blur-xl border border-brand-orange/20 shadow-sm">{t('hiw.hw2.badge')}</span>
                 </div>
               </div>
