@@ -21,9 +21,9 @@ export default function Header() {
         <div className="flex items-center gap-2">
           <Link to="/" onClick={() => setMobileOpen(false)}>
             <img
-              src="/images/logo.png"
+              src="/images/Indexo_health_Logo_black.png"
               alt="Indexo Health"
-              className="h-10 w-auto"
+              className="h-8 w-auto"
             />
           </Link>
         </div>

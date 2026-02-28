@@ -8,9 +8,9 @@ export default function Footer() {
       <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
         <div className="flex flex-col gap-4">
           <img
-            src="/images/logo.png"
+            src="/images/Indexo_health_Logo_black.png"
             alt="Indexo Health"
-            className="h-10 w-auto brightness-0 invert"
+            className="h-8 w-auto brightness-0 invert"
           />
           <p className="text-gray-400 text-sm leading-relaxed">
             {t('footer.desc')}
