@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://indexo.health/</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://indexo.health/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://indexo.health/?lang=zh"/>
+  </url>
+  <url>
+    <loc>https://indexo.health/mission</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://indexo.health/mission"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://indexo.health/mission?lang=zh"/>
+  </url>
+  <url>
+    <loc>https://indexo.health/how-it-works</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://indexo.health/how-it-works"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://indexo.health/how-it-works?lang=zh"/>
+  </url>
+</urlset>

@@ -1,9 +1,24 @@
+import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function OurMission() {
   const { t } = useLanguage();
 
   return (
+    <>
+      <Helmet>
+        <title>Our Mission — Indexo Health | Reinventing Sleep Care</title>
+        <meta name="description" content="Indexo Health's mission is to make medical-grade sleep and cardiovascular monitoring accessible to everyone at home. We believe preventive health should be effortless, continuous, and non-invasive." />
+        <link rel="canonical" href="https://indexo.health/mission" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://indexo.health/mission" />
+        <meta property="og:title" content="Our Mission — Indexo Health | Reinventing Sleep Care" />
+        <meta property="og:description" content="Making medical-grade sleep and cardiovascular monitoring accessible to everyone at home. Preventive health should be effortless and non-invasive." />
+        <meta property="og:image" content="https://indexo.health/images/og-home.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Our Mission — Indexo Health | Reinventing Sleep Care" />
+        <meta name="twitter:description" content="Making medical-grade sleep monitoring accessible at home. Preventive health should be effortless and non-invasive." />
+      </Helmet>
     <section className="relative w-full py-20 lg:py-28 px-4 md:px-10 lg:px-20 max-w-[1280px] mx-auto bg-white">
       <div className="max-w-4xl mx-auto text-center mb-20">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-brand-navy mb-6">
@@ -20,11 +35,10 @@ export default function OurMission() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
         <div className="relative rounded-2xl overflow-hidden shadow-2xl h-[400px] lg:h-[500px] group">
           <div className="absolute inset-0 bg-brand-navy/20 group-hover:bg-brand-navy/10 transition-colors z-10"></div>
-          <img 
-            alt="Peaceful sleep" 
-            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJJKvCbEAo4qU5vzbgTODmz_TF0yPG407ClnPOcxt3MAiiBIEdywoXXhZH-YNmiVmnnWXr_ft_Ze8UKzEcj8E-IYqaxavqs6vsMYR6V38mT1Fgto8YgDOhSnexYH_nszBIYTjxRw8-oUnoxAJFcEHaKzRdHutYDbl_E-FQJkqYTqwhO6DyT7M5t47HcTq8_TTq40m3k3YonYrxmSO-8OTfAXiMGWQvAfON_yfTgjqMbhrwZWGRJC5badb5iGdDhsYsn0cOXQpcCU4" 
-            referrerPolicy="no-referrer"
+          <img
+            alt="Peaceful bedroom environment for restful sleep monitoring"
+            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+            src="/images/hero-bedroom.jpg"
           />
           <div className="absolute bottom-6 left-6 z-20 bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-lg border border-white/50 max-w-[200px]">
             <div className="flex items-center gap-2 mb-1">
@@ -81,5 +95,6 @@ export default function OurMission() {
         </div>
       </div>
     </section>
+    </>
   );
 }

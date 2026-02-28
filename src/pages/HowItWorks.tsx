@@ -1,21 +1,38 @@
+import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function HowItWorks() {
   const { t } = useLanguage();
 
   return (
+    <>
+      <Helmet>
+        <title>How It Works — Indexo Health | Effortless Sleep & Health Monitoring</title>
+        <meta name="description" content="Discover how Indexo Health's contactless sensor monitors your sleep, breathing, and cardiovascular health every night. Setup in minutes, results by morning — no wearables, no discomfort." />
+        <link rel="canonical" href="https://indexo.health/how-it-works" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://indexo.health/how-it-works" />
+        <meta property="og:title" content="How It Works — Indexo Health | Effortless Sleep & Health Monitoring" />
+        <meta property="og:description" content="Contactless sensor monitors your sleep, breathing, and cardiovascular health every night. Setup in minutes, results by morning." />
+        <meta property="og:image" content="https://indexo.health/images/og-home.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="How It Works — Indexo Health" />
+        <meta name="twitter:description" content="Contactless sleep and cardiovascular monitoring. Setup in minutes, results by morning — no wearables, no discomfort." />
+      </Helmet>
     <div className="flex flex-col w-full bg-white">
       {/* Hero Section */}
-      <section className="relative bg-white pt-20 pb-0 lg:pt-28 lg:pb-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-100 via-white via-40% to-orange-200 z-0 pointer-events-none opacity-100"></div>
+      <section className="relative bg-white pt-16 pb-0 lg:pt-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-100 via-white via-40% to-orange-200 z-0 pointer-events-none"></div>
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-10 lg:px-16 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center lg:items-end justify-between gap-12 lg:gap-0">
-            <div className="w-full lg:w-5/12 flex flex-col items-start text-left relative z-20 pb-20 lg:pb-32">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-6">
+
+            {/* Left: text content */}
+            <div className="w-full lg:w-5/12 flex flex-col items-start text-left relative z-20 pb-8 lg:pb-16">
               <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-brand-teal/10 text-brand-teal font-bold tracking-wider uppercase text-xs mb-8 border border-brand-teal/20 backdrop-blur-sm shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-brand-teal animate-pulse shadow-[0_0_8px_rgba(0,196,167,0.6)]"></span>
                 {t('hiw.hero.badge')}
               </span>
-              <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-bold mb-6 text-brand-navy leading-[1.05] tracking-tight text-shadow-sm">
+              <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-bold mb-6 text-brand-navy leading-[1.05] tracking-tight">
                 {t('hiw.hero.title1')}<br />
                 <span className="text-brand-teal relative inline-block">
                   {t('hiw.hero.title2')}
@@ -38,34 +55,49 @@ export default function HowItWorks() {
                 </a>
               </div>
             </div>
-            <div className="w-full lg:w-7/12 relative flex justify-center lg:justify-end items-end h-[500px] md:h-[600px] lg:h-[700px]">
-              <div className="relative w-full h-full flex items-end justify-center lg:justify-end z-10">
-                <img alt="3D Illustration of Healthcare Professional and Patient" className="h-full w-auto object-contain object-bottom drop-shadow-2xl mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSSe8UsSM0p8Xx8FBPQuCyzfpSJsuNoaCB2OS2Y4ZqKVWo5t6mASRqdFenT0bJBxA-mDq7TmlhvUXq3nGvc21XD3tnDf3QdciXvOymiqQxFtXp2bsC-BOxNDIWjXCoP-0Z28oEcPVdn1u--OZONh94h-zKGLD17pZFk0gvTc7118HJQ5wUOkFLOqXPIRpjt8Hseqqv_1bs_9dtbAKJV6ahUZQh_Nspzw35_ICGQG_oyasmk2bE9K-w42gtllNzbJSV4wpETH-0PFo" style={{ maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)' }} referrerPolicy="no-referrer" />
-              </div>
-              <div className="absolute top-[20%] right-[5%] md:right-[10%] glass-card p-4 rounded-2xl animate-float z-30 max-w-[220px] ring-1 ring-white/40">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white shadow-lg shadow-brand-navy/20 shrink-0">
-                    <span className="material-symbols-outlined text-xl">notifications_active</span>
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-text-secondary tracking-wider mb-0.5">{t('hiw.hero.notif.title')}</p>
-                    <p className="text-sm font-bold text-brand-navy leading-tight">{t('hiw.hero.notif.desc')}</p>
+
+            {/* Right: hero image — landscape 2624×1632, fill column width */}
+            <div className="w-full lg:w-7/12 relative">
+              <div className="relative w-full">
+                <img
+                  alt="Indexo Health medical team reviewing sleep monitoring data with patient"
+                  className="w-full h-auto object-contain"
+                  src="/images/How_it_works_hero_nobg.png"
+                  style={{
+                    maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+                    WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+                  }}
+                />
+
+                {/* Floating card — top-right */}
+                <div className="absolute top-[8%] right-[4%] glass-card p-3 rounded-2xl animate-float z-30 max-w-[200px] ring-1 ring-white/40 shadow-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-full bg-brand-navy flex items-center justify-center text-white shadow-lg shrink-0">
+                      <span className="material-symbols-outlined text-base">notifications_active</span>
+                    </div>
+                    <div>
+                      <p className="text-[9px] uppercase font-bold text-text-secondary tracking-wider mb-0.5">{t('hiw.hero.notif.title')}</p>
+                      <p className="text-xs font-bold text-brand-navy leading-tight">{t('hiw.hero.notif.desc')}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="absolute top-[50%] left-[5%] md:left-[15%] lg:left-[10%] glass-card p-4 rounded-2xl animate-float-delayed z-30 max-w-[240px] ring-1 ring-white/40">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-brand-teal flex items-center justify-center text-white shadow-lg shadow-brand-teal/30 shrink-0 relative">
-                    <span className="material-symbols-outlined text-xl">verified_user</span>
-                    <span className="absolute -top-1 -right-1 w-3 h-3 bg-brand-green border-2 border-white rounded-full shadow-sm"></span>
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-text-secondary tracking-wider mb-0.5">{t('hiw.hero.service.title')}</p>
-                    <p className="text-sm font-bold text-brand-navy leading-tight">{t('hiw.hero.service.desc')}</p>
+
+                {/* Floating card — bottom-left */}
+                <div className="absolute bottom-[18%] left-[3%] glass-card p-3 rounded-2xl animate-float-delayed z-30 max-w-[210px] ring-1 ring-white/40 shadow-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-full bg-brand-teal flex items-center justify-center text-white shadow-lg shrink-0 relative">
+                      <span className="material-symbols-outlined text-base">verified_user</span>
+                      <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-brand-green border-2 border-white rounded-full shadow-sm"></span>
+                    </div>
+                    <div>
+                      <p className="text-[9px] uppercase font-bold text-text-secondary tracking-wider mb-0.5">{t('hiw.hero.service.title')}</p>
+                      <p className="text-xs font-bold text-brand-navy leading-tight">{t('hiw.hero.service.desc')}</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -77,8 +109,8 @@ export default function HowItWorks() {
             <div className="bg-[linear-gradient(135deg,#ffffff_0%,#fcfcfc_100%)] rounded-[24px] border border-surface-border p-8 flex flex-col items-center hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500 shadow-card group overflow-hidden relative ring-1 ring-surface-border/50">
               <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-brand-navy to-brand-teal opacity-80"></div>
               <div className="relative w-full h-72 mb-8 rounded-2xl overflow-hidden bg-background-subtle flex items-center justify-center border border-surface-border/50 shadow-inner">
-                <img alt="Under-Mattress Fiber Optic Sensor visualization" className="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC63KTo-51balsQT7iU9JsnujACVZIMuyTrEwEkPAddp7yfCf7st9vT-61tVVISJlKrL1k6EPJHx0f2xPQoBfA36fAFv-aqcVuMgGc6WaaNC_KF0H7z2LYoZ8QMByLSzKXnqc5jz1vnM0Od33e7LEfQPxvx1Kchgw8GFb6MHLW7YKJMyu2WSB7nEgaXMoqJTlG9CV4DycwqzNPbMWfYh30ManPAKseSI8R-x3lLuS2o5cFFQrfPhLgagZGKnwL33xDpa3YDscK8zgo" referrerPolicy="no-referrer" />
-                <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-transparent flex items-end justify-center pb-6">
+                <img alt="Indexo Health under-mattress fiber optic sleep sensor placed beneath mattress" className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out" src="/images/sensor_under_mattress.jpg" />
+                <div className="absolute bottom-4 left-0 right-0 flex justify-center">
                   <span className="text-brand-teal font-bold text-xs uppercase tracking-widest bg-white/95 px-5 py-2 rounded-full backdrop-blur-xl border border-brand-teal/20 shadow-sm">{t('hiw.hw1.badge')}</span>
                 </div>
               </div>
@@ -93,8 +125,8 @@ export default function HowItWorks() {
             <div className="bg-[linear-gradient(135deg,#ffffff_0%,#fcfcfc_100%)] rounded-[24px] border border-surface-border p-8 flex flex-col items-center hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500 shadow-card group overflow-hidden relative ring-1 ring-surface-border/50">
               <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-brand-teal to-brand-peach opacity-80"></div>
               <div className="relative w-full h-72 mb-8 rounded-2xl overflow-hidden bg-background-subtle flex items-center justify-center border border-surface-border/50 shadow-inner">
-                <img alt="Pulse Oximetry Ring close up" className="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCll9B7-gxjHN67a5n82MPEgvUxmdQR031mdilrZK7iEdyuvM3Nm3CyRG-T0H5dN0BCkoSz4xPwFCpvXIyB7leE4sgbU7MJGCUUwp2rgLbvMJTpFuN2fKRytRtNBiLkueFuyks7mbv6kLZ_EjfqXal_qA8hDLfHrxO6TJww21IAuZvDXHQS_E9k3O9OuHsYUXg4DDTq8o_D7U4tYtq7X0ftkry6p5i-5Ti0ayi9HdIzZRUy3Of3szlrfePJH-FFymDazvsFiwkr_4M" referrerPolicy="no-referrer" />
-                <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-transparent flex items-end justify-center pb-6">
+                <img alt="Indexo Health SpO2 pulse oximetry ring sensor worn on finger during sleep" className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out" src="/images/SpO2_ring_on_finger.JPG" />
+                <div className="absolute bottom-4 left-0 right-0 flex justify-center">
                   <span className="text-brand-orange font-bold text-xs uppercase tracking-widest bg-white/95 px-5 py-2 rounded-full backdrop-blur-xl border border-brand-orange/20 shadow-sm">{t('hiw.hw2.badge')}</span>
                 </div>
               </div>
@@ -410,5 +442,6 @@ export default function HowItWorks() {
         </div>
       </section>
     </div>
+    </>
   );
 }
