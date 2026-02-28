@@ -1,9 +1,24 @@
+import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function HowItWorks() {
   const { t } = useLanguage();
 
   return (
+    <>
+      <Helmet>
+        <title>How It Works — Indexo Health | Effortless Sleep & Health Monitoring</title>
+        <meta name="description" content="Discover how Indexo Health's contactless sensor monitors your sleep, breathing, and cardiovascular health every night. Setup in minutes, results by morning — no wearables, no discomfort." />
+        <link rel="canonical" href="https://indexo.health/how-it-works" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://indexo.health/how-it-works" />
+        <meta property="og:title" content="How It Works — Indexo Health | Effortless Sleep & Health Monitoring" />
+        <meta property="og:description" content="Contactless sensor monitors your sleep, breathing, and cardiovascular health every night. Setup in minutes, results by morning." />
+        <meta property="og:image" content="https://indexo.health/images/og-home.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="How It Works — Indexo Health" />
+        <meta name="twitter:description" content="Contactless sleep and cardiovascular monitoring. Setup in minutes, results by morning — no wearables, no discomfort." />
+      </Helmet>
     <div className="flex flex-col w-full bg-white">
       {/* Hero Section */}
       <section className="relative bg-white pt-20 pb-0 lg:pt-28 lg:pb-0 overflow-hidden">
@@ -40,7 +55,7 @@ export default function HowItWorks() {
             </div>
             <div className="w-full lg:w-7/12 relative flex justify-center lg:justify-end items-end h-[500px] md:h-[600px] lg:h-[700px]">
               <div className="relative w-full h-full flex items-end justify-center lg:justify-end z-10">
-                <img alt="3D Illustration of Healthcare Professional and Patient" className="h-full w-auto object-contain object-bottom drop-shadow-2xl mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSSe8UsSM0p8Xx8FBPQuCyzfpSJsuNoaCB2OS2Y4ZqKVWo5t6mASRqdFenT0bJBxA-mDq7TmlhvUXq3nGvc21XD3tnDf3QdciXvOymiqQxFtXp2bsC-BOxNDIWjXCoP-0Z28oEcPVdn1u--OZONh94h-zKGLD17pZFk0gvTc7118HJQ5wUOkFLOqXPIRpjt8Hseqqv_1bs_9dtbAKJV6ahUZQh_Nspzw35_ICGQG_oyasmk2bE9K-w42gtllNzbJSV4wpETH-0PFo" style={{ maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)' }} referrerPolicy="no-referrer" />
+                <img alt="Indexo Health sleep monitoring device and app interface" className="h-full w-auto object-contain object-bottom drop-shadow-2xl mix-blend-multiply" src="/images/how-it-works-hero.png" style={{ maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)' }} />
               </div>
               <div className="absolute top-[20%] right-[5%] md:right-[10%] glass-card p-4 rounded-2xl animate-float z-30 max-w-[220px] ring-1 ring-white/40">
                 <div className="flex items-center gap-3">
@@ -410,5 +425,6 @@ export default function HowItWorks() {
         </div>
       </section>
     </div>
+    </>
   );
 }

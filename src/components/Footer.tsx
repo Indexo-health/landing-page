@@ -7,9 +7,11 @@ export default function Footer() {
     <footer className="bg-brand-navy text-white pt-16 pb-8 px-4 md:px-10 lg:px-20">
       <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
         <div className="flex flex-col gap-4">
-          <h2 className="text-2xl font-bold leading-tight tracking-tight text-white">
-            Indexo<span className="text-brand-teal">health</span>
-          </h2>
+          <img
+            src="/images/logo.png"
+            alt="Indexo Health"
+            className="h-10 w-auto brightness-0 invert"
+          />
           <p className="text-gray-400 text-sm leading-relaxed">
             {t('footer.desc')}
           </p>
