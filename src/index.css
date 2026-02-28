@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-teal: #00BFA5;
+  --color-brand-navy: #050A30;
+  --color-brand-orange: #FF9500;
+  --color-brand-green: #2ECC71;
+  --color-brand-danger: #FF3B30;
+  --color-brand-red: #EF4444;
+  --color-brand-amber-soft: #FF8A65;
+  --color-background-app: #f4f6f8;
+  --color-card-white: #ffffff;
+  --color-text-main: #050A30;
+  --color-text-secondary: #64748b;
+  --color-surface-border: #e2e8f0;
+  --color-sleep-deep: #1a237e;
+  --color-sleep-light: #3949ab;
+  --color-sleep-rem: #7986cb;
+  --color-sleep-awake: #e8eaf6;
+  
+  /* New colors for How It Works */
+  --color-background-subtle: #F8FAFC;
+  --color-background-cool-gray: #F8FAFB;
+  --color-background-teal-tint: #F0F9F8;
+  --color-background-off-white: #FAFAFA;
+  --color-brand-cream: #fffbf0;
+  --color-brand-teal-light: #E0F7FA;
+  --color-brand-peach: #ffe4d6;
+  --color-brand-skin: #f4c6b2;
+  
+  --font-display: "Space Grotesk", sans-serif;
+  
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-card-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 20px rgba(0, 184, 176, 0.15);
+  --shadow-soft-xl: 0 20px 40px -10px rgba(5, 10, 48, 0.08);
+  --shadow-btn-glow: 0 0 15px rgba(0, 196, 167, 0.3);
+  
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float-delayed: float 6s ease-in-out 3s infinite;
+  --animate-dash: dash 3s linear infinite;
+  --animate-dash-reverse: dash-reverse 3s linear infinite;
+  --animate-spin-slow: spin 8s linear infinite;
+}
+
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-xl border border-white/60 shadow-soft-xl;
+  }
+  .section-divider {
+    @apply w-full h-px bg-gradient-to-r from-transparent via-surface-border to-transparent my-0;
+  }
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+  .bg-grid-slate {
+    background-size: 40px 40px;
+    mask-image: linear-gradient(to bottom, transparent, black, transparent);
+  }
+  .bg-dots {
+    background-size: 20px 20px;
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes dash {
+  to { stroke-dashoffset: -40; }
+}
+
+@keyframes dash-reverse {
+  to { stroke-dashoffset: 40; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+body {
+  font-family: var(--font-display);
+  background-color: var(--color-background-app);
+  color: var(--color-text-main);
+}
