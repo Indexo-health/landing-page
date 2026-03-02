@@ -32,14 +32,14 @@ export default function OurMission() {
         </h1>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
-        <div className="relative rounded-2xl overflow-hidden shadow-2xl h-[400px] lg:h-[500px] group">
-          <div className="absolute inset-0 bg-brand-navy/20 group-hover:bg-brand-navy/10 transition-colors z-10"></div>
+      <div className="mb-24">
+        <div className="relative rounded-[24px] overflow-hidden shadow-2xl group mb-16">
           <img
-            alt="Peaceful bedroom environment for restful sleep monitoring"
-            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-            src="/images/hero-bedroom.jpg"
+            alt="Indexo Health mission — silent health monitoring protecting sleep"
+            className="w-full h-auto object-contain transform group-hover:scale-[1.02] transition-transform duration-700"
+            src="/images/Our_mission_compressed.jpg"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/40 via-transparent to-transparent pointer-events-none"></div>
           <div className="absolute bottom-6 left-6 z-20 bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-lg border border-white/50 max-w-[200px]">
             <div className="flex items-center gap-2 mb-1">
               <span className="material-symbols-outlined text-brand-teal text-xl">nightlight</span>
@@ -50,14 +50,14 @@ export default function OurMission() {
             </div>
           </div>
         </div>
-        
-        <div className="flex flex-col gap-6 lg:pl-8">
-          <div className="w-12 h-1 bg-brand-teal rounded-full mb-2"></div>
-          <h2 className="text-3xl font-bold text-brand-navy">{t('om.subtitle')}</h2>
-          <p className="text-lg leading-relaxed text-brand-navy/80">
+
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="w-12 h-1 bg-brand-teal rounded-full mb-6 mx-auto"></div>
+          <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-6 tracking-tight">{t('om.subtitle')}</h2>
+          <p className="text-lg leading-relaxed text-text-secondary mb-4">
             {t('om.p1')}
           </p>
-          <p className="text-lg leading-relaxed text-brand-navy/80">
+          <p className="text-lg leading-relaxed text-text-secondary">
             {t('om.p2')}
           </p>
         </div>
