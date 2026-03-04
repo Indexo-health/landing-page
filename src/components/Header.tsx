@@ -61,9 +61,9 @@ export default function Header() {
 
             {/* CTA buttons */}
             <div className="flex gap-2">
-              <button className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-brand-navy text-white text-sm font-bold leading-normal hover:bg-brand-navy/90 transition-all shadow-md">
+              <Link to="/get-started" className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-brand-navy text-white text-sm font-bold leading-normal hover:bg-brand-navy/90 transition-all shadow-md">
                 <span className="truncate">{t('nav.getStarted')}</span>
-              </button>
+              </Link>
               <button className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-white border border-surface-border text-brand-navy text-sm font-bold leading-normal hover:bg-surface-border/20 transition-all">
                 <span className="truncate">{t('nav.logIn')}</span>
               </button>
@@ -121,9 +121,9 @@ export default function Header() {
               </button>
             </div>
 
-            <button className="w-full h-11 rounded-full bg-brand-navy text-white text-sm font-bold hover:bg-brand-navy/90 transition-all shadow-md">
+            <Link to="/get-started" onClick={() => setMobileOpen(false)} className="w-full h-11 rounded-full bg-brand-navy text-white text-sm font-bold hover:bg-brand-navy/90 transition-all shadow-md flex items-center justify-center">
               {t('nav.getStarted')}
-            </button>
+            </Link>
             <button className="w-full h-11 rounded-full bg-white border border-surface-border text-brand-navy text-sm font-bold hover:bg-gray-50 transition-all">
               {t('nav.logIn')}
             </button>
