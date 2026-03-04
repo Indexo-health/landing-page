@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import EcosystemSection from '../components/EcosystemSection';
 import InsightsSection from '../components/InsightsSection';
@@ -116,9 +117,9 @@ export default function HowItWorks() {
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">{t('hiw.cta.title')}</h2>
           <p className="text-white/70 mb-10 max-w-xl mx-auto text-lg leading-relaxed">{t('hiw.cta.desc')}</p>
-          <button className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-brand-teal text-brand-navy font-bold text-lg hover:bg-brand-teal/90 hover:scale-105 transition-all shadow-glow hover:shadow-btn-glow">
+          <Link to="/get-started" className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-brand-teal text-brand-navy font-bold text-lg hover:bg-brand-teal/90 hover:scale-105 transition-all shadow-glow hover:shadow-btn-glow">
             {t('hiw.cta.btn')}
-          </button>
+          </Link>
         </div>
       </section>
     </div>

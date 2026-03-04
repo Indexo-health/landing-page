@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function SilentCompanion() {
@@ -31,10 +32,10 @@ export default function SilentCompanion() {
           </div>
           
           <div className="flex flex-wrap gap-4 mt-4">
-            <button className="flex items-center gap-2 h-14 px-8 rounded-full bg-brand-teal text-white font-bold text-lg hover:bg-brand-teal/90 hover:shadow-lg transition-all shadow-md shadow-brand-teal/20">
+            <Link to="/get-started" className="flex items-center gap-2 h-14 px-8 rounded-full bg-brand-teal text-white font-bold text-lg hover:bg-brand-teal/90 hover:shadow-lg transition-all shadow-md shadow-brand-teal/20">
               <span>{t('sc.btn')}</span>
               <span className="material-symbols-outlined text-sm">arrow_forward</span>
-            </button>
+            </Link>
           </div>
           
           <div className="flex items-center gap-4 mt-6 text-sm font-medium text-brand-navy/70">

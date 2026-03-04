@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function CardiovascularCare() {
@@ -51,10 +52,10 @@ export default function CardiovascularCare() {
           </div>
           
           <div className="flex flex-wrap gap-4 mt-4">
-            <button className="flex items-center gap-2 h-12 px-8 rounded-full bg-brand-teal text-white font-bold hover:bg-brand-teal/90 hover:shadow-lg transition-all shadow-md shadow-brand-teal/20">
-              <span>View Detailed Report</span>
+            <Link to="/get-started?concern=cardio_risk" className="flex items-center gap-2 h-12 px-8 rounded-full bg-brand-teal text-white font-bold hover:bg-brand-teal/90 hover:shadow-lg transition-all shadow-md shadow-brand-teal/20">
+              <span>{t('cc.btn1')}</span>
               <span className="material-symbols-outlined text-sm">arrow_forward</span>
-            </button>
+            </Link>
             <button className="flex items-center gap-2 h-12 px-8 rounded-full bg-white border border-surface-border text-brand-navy font-bold hover:bg-surface-border/50 hover:border-brand-navy/20 transition-all">
               <span>Learn Methodology</span>
             </button>
