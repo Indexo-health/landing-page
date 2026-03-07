@@ -1,14 +1,14 @@
 import { useLanguage } from '../../../contexts/LanguageContext';
 
 interface QuestionProgressBarProps {
-  current: number;  // 1-based question number
-  total: number;    // 12
+  current: number;  // 1-based page number
+  total: number;    // 3
 }
 
 export default function QuestionProgressBar({ current, total }: QuestionProgressBarProps) {
   const { t } = useLanguage();
 
-  const progressText = t('gs.s0.questionOf')
+  const progressText = t('gs.s0.stepOf')
     .replace('{current}', String(current))
     .replace('{total}', String(total));
 

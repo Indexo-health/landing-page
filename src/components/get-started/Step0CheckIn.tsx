@@ -1,7 +1,7 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import type { Step0Answers } from '../../types/getStarted';
-import { QUESTIONS, SECTIONS } from './step0/questionsConfig';
+import { QUESTIONS, PAGES } from './step0/questionsConfig';
 import QuestionCard from './step0/QuestionCard';
 import QuestionProgressBar from './step0/QuestionProgressBar';
 
@@ -13,74 +13,42 @@ interface Step0CheckInProps {
 
 export default function Step0CheckIn({ answers, onAnswerChange, onComplete }: Step0CheckInProps) {
   const { t } = useLanguage();
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [showTransition, setShowTransition] = useState(false);
-  const [transitionSectionId, setTransitionSectionId] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(0);
 
-  const currentQuestion = QUESTIONS[currentQuestionIndex];
-  const currentSection = SECTIONS.find((s) => s.id === currentQuestion.section)!;
+  const page = PAGES[currentPage];
+  const pageQuestions = page.questions
+    .map((qId) => QUESTIONS.find((q) => q.id === qId)!)
+    .filter(Boolean);
 
-  const handleAutoAdvance = useCallback(() => {
-    if (currentQuestionIndex < QUESTIONS.length - 1) {
-      const nextQ = QUESTIONS[currentQuestionIndex + 1];
-      if (nextQ.section !== currentQuestion.section) {
-        const nextSection = SECTIONS.find((s) => s.id === nextQ.section);
-        if (nextSection?.transitionKey) {
-          setTransitionSectionId(nextSection.id);
-          setShowTransition(true);
-          setTimeout(() => {
-            setShowTransition(false);
-            setTransitionSectionId(null);
-            setCurrentQuestionIndex((prev) => prev + 1);
-          }, 1500);
-        } else {
-          setCurrentQuestionIndex((prev) => prev + 1);
-        }
-      } else {
-        setCurrentQuestionIndex((prev) => prev + 1);
-      }
+  // Check if all questions on current page are answered
+  const allAnswered = pageQuestions.every((q) => {
+    const ans = answers[q.id];
+    if (q.type === 'single') return typeof ans === 'string' && ans.length > 0;
+    return Array.isArray(ans) && ans.length > 0;
+  });
+
+  const handleContinue = () => {
+    if (currentPage < PAGES.length - 1) {
+      setCurrentPage((p) => p + 1);
+      window.scrollTo(0, 0);
     } else {
       onComplete();
     }
-  }, [currentQuestionIndex, currentQuestion.section, onComplete]);
-
-  const handleContinue = () => {
-    handleAutoAdvance();
   };
 
   const handleBack = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex((prev) => prev - 1);
+    if (currentPage > 0) {
+      setCurrentPage((p) => p - 1);
+      window.scrollTo(0, 0);
     }
   };
 
-  // Transition screen
-  if (showTransition) {
-    const transitionSection = SECTIONS.find((s) => s.id === transitionSectionId);
-    return (
-      <div className="w-full min-h-[calc(100vh-73px)] flex items-center justify-center px-4">
-        <div className="text-center animate-fade-in">
-          <div className="w-12 h-12 rounded-full bg-brand-teal/10 flex items-center justify-center mx-auto mb-6">
-            <span className="material-symbols-outlined text-brand-teal text-2xl">check_circle</span>
-          </div>
-          <p className="text-xl text-brand-navy font-medium max-w-md">
-            {transitionSection?.transitionKey ? t(transitionSection.transitionKey) : ''}
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  const currentAnswer = answers[currentQuestion.id];
-  const isMulti = currentQuestion.type === 'multi';
-  const multiHasSelection = isMulti && Array.isArray(currentAnswer) && currentAnswer.length > 0;
-
   return (
     <div className="w-full min-h-[calc(100vh-73px)] flex flex-col">
-      <div className="flex-grow flex flex-col items-center justify-center px-4 py-8 lg:py-12">
+      <div className="flex-grow flex flex-col items-center px-4 py-8 lg:py-12">
         <div className="w-full max-w-2xl mx-auto">
           {/* Back button */}
-          {currentQuestionIndex > 0 && (
+          {currentPage > 0 && (
             <button
               onClick={handleBack}
               className="flex items-center gap-1 text-text-secondary hover:text-brand-navy transition-colors mb-6"
@@ -90,8 +58,8 @@ export default function Step0CheckIn({ answers, onAnswerChange, onComplete }: St
             </button>
           )}
 
-          {/* Title and description (only on first question) */}
-          {currentQuestionIndex === 0 && (
+          {/* Title and description (only on first page) */}
+          {currentPage === 0 && (
             <div className="mb-8">
               <h1 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4 tracking-tight">
                 {t('gs.s0.title')}
@@ -105,36 +73,39 @@ export default function Step0CheckIn({ answers, onAnswerChange, onComplete }: St
           )}
 
           {/* Progress bar */}
-          <QuestionProgressBar current={currentQuestionIndex + 1} total={QUESTIONS.length} />
+          <QuestionProgressBar current={currentPage + 1} total={PAGES.length} />
 
           {/* Section badge */}
-          <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-brand-teal/10 text-brand-teal font-bold tracking-wider uppercase text-xs border border-brand-teal/20 mb-6">
-            {t(currentSection.titleKey)}
+          <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-brand-teal/10 text-brand-teal font-bold tracking-wider uppercase text-xs border border-brand-teal/20 mb-8">
+            {t(page.titleKey)}
           </span>
 
-          {/* Question card */}
-          <QuestionCard
-            question={currentQuestion}
-            answer={currentAnswer}
-            onAnswer={onAnswerChange}
-            onAutoAdvance={handleAutoAdvance}
-          />
+          {/* All questions for current page */}
+          <div className="flex flex-col gap-10">
+            {pageQuestions.map((q) => (
+              <div key={q.id}>
+                <QuestionCard
+                  question={q}
+                  answer={answers[q.id]}
+                  onAnswer={onAnswerChange}
+                />
+              </div>
+            ))}
+          </div>
 
-          {/* Continue button for multi-select */}
-          {isMulti && (
-            <button
-              onClick={handleContinue}
-              disabled={!multiHasSelection}
-              className={`mt-6 w-full flex items-center justify-center gap-2 h-12 rounded-xl font-bold text-lg transition-all ${
-                multiHasSelection
-                  ? 'bg-brand-teal text-white hover:bg-brand-teal/90 shadow-md'
-                  : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-              }`}
-            >
-              {t('gs.s0.continue')}
-              <span className="material-symbols-outlined text-sm">arrow_forward</span>
-            </button>
-          )}
+          {/* Continue button */}
+          <button
+            onClick={handleContinue}
+            disabled={!allAnswered}
+            className={`mt-10 w-full flex items-center justify-center gap-2 h-12 rounded-xl font-bold text-lg transition-all ${
+              allAnswered
+                ? 'bg-brand-teal text-white hover:bg-brand-teal/90 shadow-md'
+                : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+            }`}
+          >
+            {currentPage < PAGES.length - 1 ? t('gs.s0.continue') : t('gs.s0.finish')}
+            <span className="material-symbols-outlined text-sm">arrow_forward</span>
+          </button>
         </div>
       </div>
     </div>

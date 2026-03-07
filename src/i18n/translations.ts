@@ -521,15 +521,9 @@ export const translations = {
     'gs.s0.complete': 'See My Results',
 
     // Get Started — Step 0 Section titles
-    'gs.s0.sec1.title': 'About You',
-    'gs.s0.sec2.title': 'Heart & Body',
-    'gs.s0.sec2.transition': 'Thanks! Now a few questions about your overall health.',
-    'gs.s0.sec3.title': 'Sleep & Breathing',
-    'gs.s0.sec3.transition': 'Next, let\u2019s talk about your sleep.',
-    'gs.s0.sec4.title': 'Sleep Quality & Routine',
-    'gs.s0.sec4.transition': 'Almost done! A couple more about your sleep patterns.',
-    'gs.s0.sec5.title': 'Energy & Recovery',
-    'gs.s0.sec5.transition': 'Great. Last section \u2014 about your energy and daily life.',
+    'gs.s0.page1.title': 'You & Your Health',
+    'gs.s0.page2.title': 'Sleep & Breathing',
+    'gs.s0.page3.title': 'Energy & Recovery',
 
     // Get Started — Step 0 Q1
     'gs.s0.q1.title': 'What is your age range?',
@@ -656,7 +650,8 @@ export const translations = {
     'gs.s2.backToResults': 'Back to Results',
 
     // Get Started — Step 0 progress
-    'gs.s0.questionOf': 'Question {current} of {total}',
+    'gs.s0.stepOf': 'Step {current} of {total}',
+    'gs.s0.finish': 'See My Results',
     'gs.s0.back': 'Back',
     'gs.s1r.back': 'Back to Check-In',
   },
@@ -1182,15 +1177,9 @@ export const translations = {
     'gs.s0.complete': '查看我的结果',
 
     // Get Started — Step 0 Section titles
-    'gs.s0.sec1.title': '关于您',
-    'gs.s0.sec2.title': '心脏与身体',
-    'gs.s0.sec2.transition': '谢谢！接下来问几个关于整体健康的问题。',
-    'gs.s0.sec3.title': '睡眠与呼吸',
-    'gs.s0.sec3.transition': '接下来，聊聊您的睡眠。',
-    'gs.s0.sec4.title': '睡眠质量与规律',
-    'gs.s0.sec4.transition': '快完成了！再问几个关于睡眠规律的问题。',
-    'gs.s0.sec5.title': '精力与恢复',
-    'gs.s0.sec5.transition': '很好，最后一部分 \u2014 关于您的精力和日常生活。',
+    'gs.s0.page1.title': '您和您的健康',
+    'gs.s0.page2.title': '睡眠与呼吸',
+    'gs.s0.page3.title': '精力与恢复',
 
     // Get Started — Step 0 Q1
     'gs.s0.q1.title': '您的年龄段是？',
@@ -1317,7 +1306,8 @@ export const translations = {
     'gs.s2.backToResults': '返回评估结果',
 
     // Get Started — Step 0 progress
-    'gs.s0.questionOf': '第 {current} 题，共 {total} 题',
+    'gs.s0.stepOf': '第 {current} 步，共 {total} 步',
+    'gs.s0.finish': '查看我的结果',
     'gs.s0.back': '返回',
     'gs.s1r.back': '返回健康自查',
   }
