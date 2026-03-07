@@ -1,4 +1,3 @@
-import { useRef, useEffect } from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import type { QuestionDef } from '../../../types/getStarted';
 
@@ -6,29 +5,13 @@ interface QuestionCardProps {
   question: QuestionDef;
   answer: string | string[] | undefined;
   onAnswer: (questionId: string, value: string | string[]) => void;
-  onAutoAdvance?: () => void;
 }
 
-export default function QuestionCard({ question, answer, onAnswer, onAutoAdvance }: QuestionCardProps) {
+export default function QuestionCard({ question, answer, onAnswer }: QuestionCardProps) {
   const { t } = useLanguage();
-  const autoAdvanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (autoAdvanceTimer.current) {
-        clearTimeout(autoAdvanceTimer.current);
-      }
-    };
-  }, []);
 
   const handleSingleSelect = (optionId: string) => {
     onAnswer(question.id, optionId);
-    if (autoAdvanceTimer.current) {
-      clearTimeout(autoAdvanceTimer.current);
-    }
-    autoAdvanceTimer.current = setTimeout(() => {
-      onAutoAdvance?.();
-    }, 300);
   };
 
   const handleMultiToggle = (optionId: string) => {
@@ -56,15 +39,15 @@ export default function QuestionCard({ question, answer, onAnswer, onAutoAdvance
   if (question.type === 'single') {
     return (
       <div>
-        <h3 className="text-xl font-bold text-brand-navy mb-6">{t(question.titleKey)}</h3>
-        <div className="flex flex-col gap-3">
+        <h3 className="text-xl font-bold text-brand-navy mb-4">{t(question.titleKey)}</h3>
+        <div className="flex flex-col gap-2.5">
           {question.options.map((option) => {
             const isSelected = answer === option.id;
             return (
               <button
                 key={option.id}
                 onClick={() => handleSingleSelect(option.id)}
-                className={`rounded-xl border p-4 text-left w-full transition-all ${
+                className={`rounded-xl border p-3.5 text-left w-full transition-all ${
                   isSelected
                     ? 'border-brand-teal border-2 bg-brand-teal/5'
                     : 'border-gray-200 hover:border-brand-teal/50 bg-white'
@@ -86,15 +69,15 @@ export default function QuestionCard({ question, answer, onAnswer, onAutoAdvance
 
   return (
     <div>
-      <h3 className="text-xl font-bold text-brand-navy mb-6">{t(question.titleKey)}</h3>
-      <div className="flex flex-col gap-3">
+      <h3 className="text-xl font-bold text-brand-navy mb-4">{t(question.titleKey)}</h3>
+      <div className="flex flex-col gap-2.5">
         {question.options.map((option) => {
           const isChecked = currentSelections.includes(option.id);
           return (
             <button
               key={option.id}
               onClick={() => handleMultiToggle(option.id)}
-              className={`rounded-xl border p-4 text-left w-full transition-all flex items-center gap-3 ${
+              className={`rounded-xl border p-3.5 text-left w-full transition-all flex items-center gap-3 ${
                 isChecked
                   ? 'border-brand-teal border-2 bg-brand-teal/5'
                   : 'border-gray-200 hover:border-brand-teal/50 bg-white'

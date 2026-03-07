@@ -5,7 +5,7 @@ export type Step = 0 | 1 | 2 | 3;
 // Step 0 Question Types
 export type QuestionType = 'single' | 'multi';
 export type QuestionId = 'q1' | 'q2' | 'q3' | 'q4' | 'q5' | 'q6' | 'q7' | 'q8' | 'q9' | 'q10' | 'q11' | 'q12';
-export type SectionId = 'about_you' | 'heart_body' | 'sleep_breathing' | 'sleep_quality' | 'energy_recovery';
+export type SectionId = 'you_health' | 'sleep_breathing' | 'energy_recovery';
 
 export interface QuestionOption {
   id: string;
@@ -23,7 +23,6 @@ export interface QuestionDef {
 export interface SectionDef {
   id: SectionId;
   titleKey: string;
-  transitionKey?: string;
   questions: QuestionId[];
 }
 
