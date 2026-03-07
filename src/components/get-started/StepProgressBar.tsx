@@ -1,33 +1,22 @@
 import { useLanguage } from '../../contexts/LanguageContext';
-import type { Step, Concern } from '../../types/getStarted';
+import type { Step } from '../../types/getStarted';
 
 interface StepProgressBarProps {
   step: Step;
-  concern: Concern;
   onExit: () => void;
 }
 
-export default function StepProgressBar({ step, concern, onExit }: StepProgressBarProps) {
+export default function StepProgressBar({ step, onExit }: StepProgressBarProps) {
   const { t } = useLanguage();
 
-  // Step 2 label changes based on the selected concern
-  const step2Label = (() => {
-    switch (concern) {
-      case 'sleep_apnea':
-        return t('gs.step.screening');
-      case 'sleep_analysis':
-        return t('gs.step.sleepProfile');
-      case 'recovery':
-        return t('gs.step.recovery');
-      case 'cardio_risk':
-        return t('gs.step.profile');
-      default:
-        return t('gs.step.profile');
-    }
-  })();
+  const steps = [
+    { key: 'checkIn', label: t('gs.step.checkIn') },
+    { key: 'results', label: t('gs.step.results') },
+    { key: 'assessment', label: t('gs.step.assessment') },
+    { key: 'plan', label: t('gs.step.plan') },
+  ];
 
-  // Progress bar width based on current step
-  const progressWidth = step === 1 ? '33.33%' : step === 2 ? '66.66%' : '100%';
+  const progressWidth = `${((step + 1) / steps.length) * 100}%`;
 
   return (
     <header className="flex items-center justify-between border-b border-surface-border px-6 md:px-10 py-4 bg-white/95 backdrop-blur-sm sticky top-0 z-40">
@@ -39,15 +28,16 @@ export default function StepProgressBar({ step, concern, onExit }: StepProgressB
       </div>
 
       {/* Center: Step labels + progress bar (hidden on small screens) */}
-      <div className="flex-col items-center flex-1 max-w-xs md:max-w-md mx-auto hidden sm:flex">
-        <div className="flex items-center w-full justify-between text-xs font-semibold text-brand-navy mb-2 px-2">
-          <span className="text-brand-teal">{t('gs.step.needs')}</span>
-          <span className={step >= 2 ? 'text-brand-teal' : 'text-gray-400'}>
-            {step2Label}
-          </span>
-          <span className={step >= 3 ? 'text-brand-teal' : 'text-gray-400'}>
-            {t('gs.step.plan')}
-          </span>
+      <div className="flex-col items-center flex-1 max-w-sm md:max-w-lg mx-auto hidden sm:flex">
+        <div className="flex items-center w-full justify-between text-xs font-semibold text-brand-navy mb-2 px-1">
+          {steps.map((s, i) => (
+            <span
+              key={s.key}
+              className={i <= step ? 'text-brand-teal' : 'text-gray-400'}
+            >
+              {s.label}
+            </span>
+          ))}
         </div>
         <div className="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
           <div

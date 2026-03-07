@@ -1,32 +1,53 @@
 import { useState } from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
+import type { Step0Answers } from '../../../types/getStarted';
+
+const AGE_MAP: Record<string, string> = {
+  q1_under30: '25',
+  q1_30_39: '35',
+  q1_40_49: '45',
+  q1_50_59: '55',
+  q1_60plus: '65',
+};
+
+const SEX_MAP: Record<string, string> = {
+  q2_male: 'male',
+  q2_female: 'female',
+  q2_prefer_not: '',
+};
 
 interface CardioAuditProps {
   onNext: () => void;
   onBack: () => void;
+  step0Answers?: Step0Answers;
 }
 
-export default function CardioAudit({ onNext, onBack }: CardioAuditProps) {
+export default function CardioAudit({ onNext, onBack, step0Answers }: CardioAuditProps) {
   const { t } = useLanguage();
+
+  // Prefill age/sex from Step 0
+  const prefilledAge = step0Answers?.q1 ? AGE_MAP[step0Answers.q1 as string] ?? '' : '';
+  const prefilledSex = step0Answers?.q2 ? SEX_MAP[step0Answers.q2 as string] ?? '' : '';
 
   // Section 1: Medical Profile - checkboxes
   const [selectedConditions, setSelectedConditions] = useState<Set<number>>(new Set());
   // Section 2: Medication toggles
   const [activeMeds, setActiveMeds] = useState<Set<number>>(new Set());
   // Section 3: Lifestyle
-  const [age, setAge] = useState('');
-  const [sex, setSex] = useState('');
+  const [age, setAge] = useState(prefilledAge);
+  const [sex, setSex] = useState(prefilledSex);
   const [selectedLifestyle, setSelectedLifestyle] = useState<Set<number>>(new Set());
 
-  const conditions = [1, 2, 3, 4, 5, 6, 7, 8];
+  const conditions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const medications = [
     { id: 1, icon: 'medication' },
     { id: 2, icon: 'bloodtype' },
     { id: 3, icon: 'science' },
     { id: 4, icon: 'water_drop' },
     { id: 5, icon: 'local_pharmacy' },
+    { id: 6, icon: 'more_horiz' },
   ];
-  const lifestyleItems = [1, 2, 3, 4, 5];
+  const lifestyleItems = [1, 2, 3, 4, 5, 6, 7, 8];
 
   const toggleCondition = (id: number) => {
     setSelectedConditions((prev) => {
@@ -97,21 +118,21 @@ export default function CardioAudit({ onNext, onBack }: CardioAuditProps) {
             <h2 className="text-lg font-bold text-brand-navy mb-1">{t('gs.ca.conditions')}</h2>
             <p className="text-sm text-text-secondary mb-4">{t('gs.ca.conditionsDesc')}</p>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {conditions.map((c) => {
                 const selected = selectedConditions.has(c);
                 return (
                   <label
                     key={c}
                     onClick={() => toggleCondition(c)}
-                    className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${
+                    className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-200 ${
                       selected
                         ? 'border-brand-teal bg-brand-teal/5'
                         : 'border-surface-border hover:border-brand-teal/30'
                     }`}
                   >
                     <div
-                      className={`w-5 h-5 rounded flex-shrink-0 flex items-center justify-center border-2 transition-all duration-200 ${
+                      className={`w-5 h-5 rounded flex-shrink-0 flex items-center justify-center border-2 transition-all duration-200 mt-0.5 ${
                         selected
                           ? 'bg-brand-teal border-brand-teal'
                           : 'border-gray-400 bg-white'
@@ -121,9 +142,14 @@ export default function CardioAudit({ onNext, onBack }: CardioAuditProps) {
                         <span className="material-symbols-outlined text-white text-sm">check</span>
                       )}
                     </div>
-                    <span className="text-sm font-medium text-brand-navy leading-tight">
-                      {t(`gs.ca.c${c}`)}
-                    </span>
+                    <div>
+                      <span className="text-sm font-medium text-brand-navy leading-tight block">
+                        {t(`gs.ca.c${c}`)}
+                      </span>
+                      <span className="text-xs text-text-secondary leading-snug block mt-0.5">
+                        {t(`gs.ca.c${c}.hint`)}
+                      </span>
+                    </div>
                   </label>
                 );
               })}
@@ -195,7 +221,7 @@ export default function CardioAudit({ onNext, onBack }: CardioAuditProps) {
             <h2 className="text-lg font-bold text-brand-navy mb-4">{t('gs.ca.personal')}</h2>
 
             {/* Age and Sex inputs */}
-            <div className="grid grid-cols-2 gap-4 mb-6">
+            <div className="grid grid-cols-2 gap-4 mb-2">
               <div>
                 <label className="text-sm font-medium text-brand-navy mb-1.5 block">
                   {t('gs.ca.age')}
@@ -223,6 +249,13 @@ export default function CardioAudit({ onNext, onBack }: CardioAuditProps) {
                 </select>
               </div>
             </div>
+            {(prefilledAge || prefilledSex) && (
+              <p className="text-xs text-brand-teal flex items-center gap-1 mb-6">
+                <span className="material-symbols-outlined text-sm">info</span>
+                {t('gs.ca.prefilled')}
+              </p>
+            )}
+            {!prefilledAge && !prefilledSex && <div className="mb-4" />}
 
             {/* Lifestyle stressors */}
             <h3 className="text-sm font-bold text-brand-navy mb-1">{t('gs.ca.stressors')}</h3>

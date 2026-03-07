@@ -1,11 +1,36 @@
 import { useLanguage } from '../../contexts/LanguageContext';
+import type { Concern, DirectionScores, RecommendedConcern } from '../../types/getStarted';
 
 interface Props {
+  scores: DirectionScores;
+  selectedConcerns: Concern[];
+  recommendations: RecommendedConcern[];
   onBack: () => void;
 }
 
-export default function Step3Plan({ onBack }: Props) {
+const CONCERN_META: Record<Concern, { icon: string; titleKey: string }> = {
+  sleep_apnea: { icon: 'pulmonology', titleKey: 'gs.s1.concern.sleepApnea.title' },
+  cardio_risk: { icon: 'monitor_heart', titleKey: 'gs.s1.concern.cardio.title' },
+  recovery: { icon: 'battery_charging_full', titleKey: 'gs.s1.concern.recovery.title' },
+  sleep_analysis: { icon: 'auto_graph', titleKey: 'gs.s1.concern.sleepAnalysis.title' },
+};
+
+function getRiskLevel(score: number): { labelKey: string; color: string; bg: string } {
+  if (score <= 30) return { labelKey: 'gs.s3.low', color: 'text-brand-green', bg: 'bg-green-50' };
+  if (score <= 60) return { labelKey: 'gs.s3.moderate', color: 'text-brand-orange', bg: 'bg-orange-50' };
+  return { labelKey: 'gs.s3.highRisk', color: 'text-brand-danger', bg: 'bg-red-50' };
+}
+
+export default function Step3Plan({ scores, selectedConcerns, recommendations, onBack }: Props) {
   const { t } = useLanguage();
+
+  // Find the primary concern (highest score among selected)
+  const primaryConcern = selectedConcerns.reduce((best, c) => {
+    return scores[c] > scores[best] ? c : best;
+  }, selectedConcerns[0]);
+
+  const primaryScore = primaryConcern ? scores[primaryConcern] : 0;
+  const riskInfo = getRiskLevel(primaryScore);
 
   return (
     <main className="flex-grow flex flex-col relative overflow-hidden h-[calc(100vh-73px)] bg-background-subtle">
@@ -43,19 +68,26 @@ export default function Step3Plan({ onBack }: Props) {
                 {t('gs.s3.summaryTitle')}
               </h3>
               <div className="space-y-4">
+                {/* Dynamic primary focus */}
                 <div className="flex justify-between items-center pb-3 border-b border-gray-100">
                   <span className="text-text-secondary text-sm">{t('gs.s3.primaryFocus')}</span>
-                  <span className="font-semibold text-brand-navy text-sm">{t('gs.s3.cardioRisk')}</span>
-                </div>
-                <div className="flex justify-between items-center pb-3 border-b border-gray-100">
-                  <span className="text-text-secondary text-sm">{t('gs.s3.riskLevel')}</span>
-                  <span className="inline-flex items-center gap-1 px-2 py-1 bg-orange-50 text-brand-orange text-xs font-bold rounded">
-                    {t('gs.s3.moderate')}
+                  <span className="font-semibold text-brand-navy text-sm">
+                    {primaryConcern ? t(CONCERN_META[primaryConcern].titleKey) : '—'}
                   </span>
                 </div>
+                {/* Dynamic risk level */}
+                <div className="flex justify-between items-center pb-3 border-b border-gray-100">
+                  <span className="text-text-secondary text-sm">{t('gs.s3.riskLevel')}</span>
+                  <span className={`inline-flex items-center gap-1 px-2 py-1 ${riskInfo.bg} ${riskInfo.color} text-xs font-bold rounded`}>
+                    {t(riskInfo.labelKey)}
+                  </span>
+                </div>
+                {/* Areas assessed */}
                 <div className="flex justify-between items-center pb-3 border-b border-gray-100">
                   <span className="text-text-secondary text-sm">{t('gs.s3.keyIndicator')}</span>
-                  <span className="font-semibold text-brand-navy text-sm">{t('gs.s3.elevatedHR')}</span>
+                  <span className="font-semibold text-brand-navy text-sm">
+                    {selectedConcerns.length} {selectedConcerns.length === 1 ? 'area' : 'areas'}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-text-secondary text-sm">{t('gs.s3.dataConfidence')}</span>
@@ -63,6 +95,30 @@ export default function Step3Plan({ onBack }: Props) {
                 </div>
               </div>
             </div>
+
+            {/* Assessed Areas Card */}
+            {selectedConcerns.length > 0 && (
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-sm font-bold text-brand-navy uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <span className="material-symbols-outlined text-brand-teal">checklist</span>
+                  {t('gs.s3.summaryTitle')}
+                </h3>
+                <div className="space-y-3">
+                  {selectedConcerns.map((c) => {
+                    const meta = CONCERN_META[c];
+                    const score = scores[c];
+                    const risk = getRiskLevel(score);
+                    return (
+                      <div key={c} className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-surface-border">
+                        <span className="material-symbols-outlined text-brand-teal">{meta.icon}</span>
+                        <span className="text-sm font-medium text-brand-navy flex-1">{t(meta.titleKey)}</span>
+                        <span className={`text-xs font-bold ${risk.color}`}>{score}%</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             {/* Next Steps Card */}
             <div className="bg-brand-navy rounded-2xl p-6 text-white relative overflow-hidden">
