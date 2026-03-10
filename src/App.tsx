@@ -12,6 +12,7 @@ import OurMission from './pages/OurMission';
 import HowItWorks from './pages/HowItWorks';
 import GetStarted from './pages/GetStarted';
 import Product from './pages/Product';
+import Technology from './pages/Technology';
 import NotFound from './pages/NotFound';
 import { LanguageProvider } from './contexts/LanguageContext';
 
@@ -29,6 +30,7 @@ function AppLayout() {
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/get-started" element={<GetStarted />} />
           <Route path="/product" element={<Product />} />
+          <Route path="/technology" element={<Technology />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
