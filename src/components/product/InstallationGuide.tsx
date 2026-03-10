@@ -4,6 +4,7 @@ const steps = [
   { key: 's1', icon: 'king_bed', img: '/images/product/installation-diagram.png' },
   { key: 's2', icon: 'power', img: '/images/product/power-on-connect.jpg' },
   { key: 's3', icon: 'nightlight', img: '/images/product/product-angle-4.jpg' },
+  { key: 's4', icon: 'ring_volume', img: '/images/product/spo2-ring-3d.png', isPro: true },
 ];
 
 export default function InstallationGuide() {
@@ -26,30 +27,44 @@ export default function InstallationGuide() {
           </p>
         </div>
 
-        {/* 3-step cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+        {/* 4-step cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
           {/* Dashed connector line (desktop only) */}
-          <div className="hidden md:block absolute top-28 left-[20%] right-[20%] border-t-2 border-dashed border-brand-teal/30 z-0" />
+          <div className="hidden lg:block absolute top-28 left-[12%] right-[12%] border-t-2 border-dashed border-brand-teal/30 z-0" />
 
           {steps.map((step, index) => (
             <div key={step.key} className="relative z-10 flex flex-col items-center text-center">
               {/* Step number */}
-              <div className="w-14 h-14 rounded-full bg-brand-teal text-white flex items-center justify-center text-xl font-bold mb-6 shadow-md shadow-brand-teal/20">
+              <div className={`w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold mb-6 shadow-md ${
+                step.isPro
+                  ? 'bg-brand-orange text-white shadow-brand-orange/20'
+                  : 'bg-brand-teal text-white shadow-brand-teal/20'
+              }`}>
                 {index + 1}
               </div>
 
               {/* Image */}
-              <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-surface-border shadow-card mb-6">
+              <div className={`w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border shadow-card mb-6 ${
+                step.isPro ? 'border-brand-orange/30' : 'border-surface-border'
+              }`}>
                 <img
                   src={step.img}
                   alt={t(`pp.install.${step.key}.title`)}
-                  className="w-full h-full object-cover"
+                  className={`w-full h-full ${step.isPro ? 'object-contain p-4' : 'object-cover'}`}
                 />
               </div>
 
+              {/* Pro badge */}
+              {step.isPro && (
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-brand-orange/10 text-brand-orange text-[10px] font-bold mb-2">
+                  <span className="material-symbols-outlined text-[10px]">star</span>
+                  {t('pp.install.s4.badge')}
+                </span>
+              )}
+
               {/* Icon + Title */}
               <div className="flex items-center gap-2 mb-2">
-                <span className="material-symbols-outlined text-brand-teal text-xl">{step.icon}</span>
+                <span className={`material-symbols-outlined text-xl ${step.isPro ? 'text-brand-orange' : 'text-brand-teal'}`}>{step.icon}</span>
                 <h3 className="text-lg font-bold text-brand-navy">
                   {t(`pp.install.${step.key}.title`)}
                 </h3>

@@ -11,7 +11,7 @@ const galleryImages = [
   { src: '/images/product/cs03-components.png', key: 'components' },
   { src: '/images/product/product-angle-4.jpg', key: 'angle1' },
   { src: '/images/product/product-angle-9.jpg', key: 'angle2' },
-  { src: '/images/product/ring-spo2.jpg', key: 'ring' },
+  { src: '/images/product/spo2-ring-3d.png', key: 'ring' },
   { src: '/images/product/app-home-dashboard.png', key: 'app' },
 ];
 
@@ -22,8 +22,37 @@ const highlights = [
   { icon: 'sync', key: 'h4' },
 ];
 
-const stdFeatures = ['f1', 'f2', 'f3', 'f4', 'f5'];
-const proFeatures = ['f1', 'f2', 'f3', 'f4', 'f5'];
+/* ── Inline SVG: Monitoring Mat silhouette ── */
+function MatSvg({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 80 50" fill="none" className={className} aria-hidden="true">
+      {/* Mat body */}
+      <rect x="6" y="14" width="68" height="28" rx="4" fill="currentColor" opacity="0.12" stroke="currentColor" strokeWidth="1.5" />
+      {/* Sensor strip */}
+      <rect x="22" y="22" width="36" height="12" rx="2" fill="currentColor" opacity="0.25" />
+      {/* Signal waves */}
+      <path d="M40 18 Q43 14 46 18 Q49 22 52 18" stroke="currentColor" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+      {/* Label */}
+      <text x="40" y="30" textAnchor="middle" fill="currentColor" fontSize="5" fontWeight="600" opacity="0.7">BCG</text>
+    </svg>
+  );
+}
+
+/* ── Inline SVG: SpO2 Ring silhouette ── */
+function RingSvg({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 40 50" fill="none" className={className} aria-hidden="true">
+      {/* Ring outer */}
+      <ellipse cx="20" cy="26" rx="14" ry="16" stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.08" />
+      {/* Ring inner cutout */}
+      <ellipse cx="20" cy="26" rx="9" ry="11" fill="white" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+      {/* Sensor dot */}
+      <circle cx="20" cy="38" r="3" fill="currentColor" opacity="0.3" />
+      {/* SpO2 label */}
+      <text x="20" y="16" textAnchor="middle" fill="currentColor" fontSize="5.5" fontWeight="700" opacity="0.7">SpO2</text>
+    </svg>
+  );
+}
 
 export default function ProductHeroBuy({ shopify }: Props) {
   const { t } = useLanguage();
@@ -102,28 +131,21 @@ export default function ProductHeroBuy({ shopify }: Props) {
               <span className="text-sm text-text-secondary font-medium">USD</span>
             </div>
 
-            {/* Key highlights */}
-            <div className="rounded-2xl bg-background-subtle border border-surface-border/50 p-5 mb-6">
-              <div className="flex flex-col gap-3">
-                {highlights.map((h) => (
-                  <div key={h.key} className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-brand-teal/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="material-symbols-outlined text-brand-teal text-lg">{h.icon}</span>
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-brand-navy leading-tight">
-                        {t(`pp.buy.${h.key}.title`)}
-                      </p>
-                      <p className="text-xs text-text-secondary mt-0.5">
-                        {t(`pp.buy.${h.key}.desc`)}
-                      </p>
-                    </div>
+            {/* Key highlights — compact row */}
+            <div className="grid grid-cols-2 gap-3 mb-6">
+              {highlights.map((h) => (
+                <div key={h.key} className="flex items-center gap-2.5 p-3 rounded-xl bg-background-subtle border border-surface-border/40">
+                  <div className="w-8 h-8 rounded-full bg-brand-teal/10 flex items-center justify-center flex-shrink-0">
+                    <span className="material-symbols-outlined text-brand-teal text-lg">{h.icon}</span>
                   </div>
-                ))}
-              </div>
+                  <p className="text-xs font-bold text-brand-navy leading-tight">
+                    {t(`pp.buy.${h.key}.title`)}
+                  </p>
+                </div>
+              ))}
             </div>
 
-            {/* ── Package selector — vertical config cards ── */}
+            {/* ── Package selector — visual cards with SVG ── */}
             <p className="text-sm font-bold text-brand-navy mb-3 uppercase tracking-wider">
               {t('pp.buy.selectPkg')}
             </p>
@@ -132,42 +154,54 @@ export default function ProductHeroBuy({ shopify }: Props) {
               <button
                 type="button"
                 onClick={() => setSelected('standard')}
-                className={`w-full p-5 rounded-2xl border-2 text-left transition-all duration-200 ${
+                className={`w-full p-4 rounded-2xl border-2 text-left transition-all duration-200 ${
                   selected === 'standard'
                     ? 'border-brand-teal bg-background-teal-tint shadow-glow'
                     : 'border-surface-border bg-white hover:border-brand-teal/30'
                 }`}
               >
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <p className="text-lg font-bold text-brand-navy">{t('pp.pkg.std.title')}</p>
-                    <span className="text-xs text-text-secondary font-medium">— {t('pp.buy.std.brief')}</span>
+                <div className="flex items-center gap-4">
+                  {/* SVG visual */}
+                  <div className="w-16 h-14 flex items-center justify-center text-brand-teal flex-shrink-0">
+                    <MatSvg className="w-16 h-14" />
                   </div>
-                  <div className="flex items-center gap-3">
-                    <p className="text-lg font-bold text-brand-navy">
-                      {shopify.loading ? (
-                        <span className="inline-block w-14 h-6 bg-gray-100 rounded animate-pulse" />
-                      ) : (
-                        formatPrice(standardVariant?.price?.amount)
-                      )}
-                    </p>
-                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
-                      selected === 'standard' ? 'border-brand-teal bg-brand-teal' : 'border-gray-200'
-                    }`}>
-                      {selected === 'standard' && (
-                        <span className="material-symbols-outlined text-white text-xs">check</span>
-                      )}
+                  {/* Info */}
+                  <div className="flex-grow min-w-0">
+                    <div className="flex items-center justify-between mb-1">
+                      <p className="text-base font-bold text-brand-navy">{t('pp.pkg.std.title')}</p>
+                      <div className="flex items-center gap-2">
+                        <p className="text-base font-bold text-brand-navy">
+                          {shopify.loading ? (
+                            <span className="inline-block w-14 h-5 bg-gray-100 rounded animate-pulse" />
+                          ) : (
+                            formatPrice(standardVariant?.price?.amount)
+                          )}
+                        </p>
+                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+                          selected === 'standard' ? 'border-brand-teal bg-brand-teal' : 'border-gray-200'
+                        }`}>
+                          {selected === 'standard' && (
+                            <span className="material-symbols-outlined text-white text-xs">check</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-xs text-text-secondary mb-2">{t('pp.pkg.std.desc')}</p>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1">
+                      <span className="text-[11px] text-text-secondary flex items-center gap-1">
+                        <span className="material-symbols-outlined text-brand-teal text-xs">check</span>
+                        {t('pp.pkg.std.f1s')}
+                      </span>
+                      <span className="text-[11px] text-text-secondary flex items-center gap-1">
+                        <span className="material-symbols-outlined text-brand-teal text-xs">check</span>
+                        {t('pp.pkg.std.f2s')}
+                      </span>
+                      <span className="text-[11px] text-text-secondary flex items-center gap-1">
+                        <span className="material-symbols-outlined text-brand-teal text-xs">check</span>
+                        {t('pp.pkg.std.f3s')}
+                      </span>
                     </div>
                   </div>
-                </div>
-                <p className="text-xs text-text-secondary mb-3">{t('pp.pkg.std.desc')}</p>
-                <div className="flex flex-col gap-1.5">
-                  {stdFeatures.map((f) => (
-                    <div key={f} className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-brand-teal text-sm">check_circle</span>
-                      <span className="text-xs text-text-secondary">{t(`pp.pkg.std.${f}`)}</span>
-                    </div>
-                  ))}
                 </div>
               </button>
 
@@ -175,7 +209,7 @@ export default function ProductHeroBuy({ shopify }: Props) {
               <button
                 type="button"
                 onClick={() => setSelected('pro')}
-                className={`w-full p-5 rounded-2xl border-2 text-left transition-all duration-200 relative ${
+                className={`w-full p-4 rounded-2xl border-2 text-left transition-all duration-200 relative ${
                   selected === 'pro'
                     ? 'border-brand-teal bg-background-teal-tint shadow-glow'
                     : 'border-surface-border bg-white hover:border-brand-teal/30'
@@ -185,36 +219,49 @@ export default function ProductHeroBuy({ shopify }: Props) {
                   <span className="material-symbols-outlined text-[10px]">star</span>
                   {t('pp.pkg.pro.badge')}
                 </span>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <p className="text-lg font-bold text-brand-navy">{t('pp.pkg.pro.title')}</p>
-                    <span className="text-xs text-text-secondary font-medium">— {t('pp.buy.pro.brief')}</span>
+                <div className="flex items-center gap-4">
+                  {/* SVG visual — mat + ring */}
+                  <div className="w-16 h-14 flex items-center justify-center text-brand-teal flex-shrink-0 relative">
+                    <MatSvg className="w-14 h-12 absolute left-0 top-0.5" />
+                    <RingSvg className="w-8 h-12 absolute right-0 bottom-0" />
                   </div>
-                  <div className="flex items-center gap-3">
-                    <p className="text-lg font-bold text-brand-navy">
-                      {shopify.loading ? (
-                        <span className="inline-block w-14 h-6 bg-gray-100 rounded animate-pulse" />
-                      ) : (
-                        formatPrice(proVariant?.price?.amount)
-                      )}
-                    </p>
-                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
-                      selected === 'pro' ? 'border-brand-teal bg-brand-teal' : 'border-gray-200'
-                    }`}>
-                      {selected === 'pro' && (
-                        <span className="material-symbols-outlined text-white text-xs">check</span>
-                      )}
+                  {/* Info */}
+                  <div className="flex-grow min-w-0">
+                    <div className="flex items-center justify-between mb-1">
+                      <p className="text-base font-bold text-brand-navy">{t('pp.pkg.pro.title')}</p>
+                      <div className="flex items-center gap-2">
+                        <p className="text-base font-bold text-brand-navy">
+                          {shopify.loading ? (
+                            <span className="inline-block w-14 h-5 bg-gray-100 rounded animate-pulse" />
+                          ) : (
+                            formatPrice(proVariant?.price?.amount)
+                          )}
+                        </p>
+                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+                          selected === 'pro' ? 'border-brand-teal bg-brand-teal' : 'border-gray-200'
+                        }`}>
+                          {selected === 'pro' && (
+                            <span className="material-symbols-outlined text-white text-xs">check</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-xs text-text-secondary mb-2">{t('pp.pkg.pro.desc')}</p>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1">
+                      <span className="text-[11px] text-text-secondary flex items-center gap-1">
+                        <span className="material-symbols-outlined text-brand-teal text-xs">check</span>
+                        {t('pp.pkg.pro.f1s')}
+                      </span>
+                      <span className="text-[11px] text-text-secondary flex items-center gap-1">
+                        <span className="material-symbols-outlined text-brand-orange text-xs">add_circle</span>
+                        {t('pp.pkg.pro.f2s')}
+                      </span>
+                      <span className="text-[11px] text-text-secondary flex items-center gap-1">
+                        <span className="material-symbols-outlined text-brand-orange text-xs">add_circle</span>
+                        {t('pp.pkg.pro.f3s')}
+                      </span>
                     </div>
                   </div>
-                </div>
-                <p className="text-xs text-text-secondary mb-3">{t('pp.pkg.pro.desc')}</p>
-                <div className="flex flex-col gap-1.5">
-                  {proFeatures.map((f) => (
-                    <div key={f} className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-brand-teal text-sm">check_circle</span>
-                      <span className="text-xs text-text-secondary">{t(`pp.pkg.pro.${f}`)}</span>
-                    </div>
-                  ))}
                 </div>
               </button>
             </div>
@@ -242,12 +289,12 @@ export default function ProductHeroBuy({ shopify }: Props) {
             )}
 
             {/* Shipping & trust */}
-            <div className="mt-4 flex flex-col gap-2">
-              <div className="flex items-center gap-2 text-xs text-text-secondary justify-center">
+            <div className="mt-4 flex items-center justify-center gap-6">
+              <div className="flex items-center gap-1.5 text-xs text-text-secondary">
                 <span className="material-symbols-outlined text-sm">local_shipping</span>
                 {t('pp.buy.ship1')}
               </div>
-              <div className="flex items-center gap-2 text-xs text-text-secondary justify-center">
+              <div className="flex items-center gap-1.5 text-xs text-text-secondary">
                 <span className="material-symbols-outlined text-sm">refresh</span>
                 {t('pp.buy.ship2')}
               </div>

@@ -5,25 +5,21 @@ const features = [
     key: 'sleep',
     icon: 'bedtime',
     appImg: '/images/product/app-sleep.png',
-    extraImg: '/images/product/app-regularity.png',
   },
   {
     key: 'recovery',
     icon: 'health_and_safety',
     appImg: '/images/product/app-recovery.png',
-    extraImg: '/images/product/app-home-dashboard.png',
   },
   {
     key: 'heart',
     icon: 'monitor_heart',
     appImg: '/images/product/app-vitals.png',
-    extraImg: '/images/product/app-care-hub.png',
   },
   {
     key: 'spo2',
     icon: 'spo2',
     appImg: '/images/product/app-spo2-trend.png',
-    extraImg: '/images/product/app-apnea.png',
     isPro: true,
   },
 ];
@@ -48,34 +44,25 @@ export default function FeatureShowcase() {
           </p>
         </div>
 
-        {/* Feature blocks — alternating layout */}
-        <div className="flex flex-col gap-28">
+        {/* Feature blocks — alternating layout, single phone */}
+        <div className="flex flex-col gap-24">
           {features.map((feat, index) => (
             <div
               key={feat.key}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center"
             >
-              {/* Phone mockups — side by side, no overlap */}
-              <div className={`flex justify-center gap-4 md:gap-6 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                {/* Primary phone */}
-                <div className="w-[160px] md:w-[200px] lg:w-[220px] rounded-[28px] overflow-hidden shadow-2xl border-[5px] border-brand-navy/90 bg-black flex-shrink-0">
+              {/* Single phone mockup */}
+              <div className={`flex justify-center ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+                <div className="w-[200px] md:w-[240px] lg:w-[260px] rounded-[32px] overflow-hidden shadow-2xl border-[6px] border-brand-navy/90 bg-black">
                   <img
                     src={feat.appImg}
                     alt={t(`pp.feat.${feat.key}.title`)}
                     className="w-full h-auto"
                   />
                 </div>
-                {/* Secondary phone */}
-                <div className="w-[160px] md:w-[200px] lg:w-[220px] rounded-[28px] overflow-hidden shadow-xl border-[5px] border-gray-300/80 bg-black flex-shrink-0">
-                  <img
-                    src={feat.extraImg}
-                    alt=""
-                    className="w-full h-auto"
-                  />
-                </div>
               </div>
 
-              {/* Text content */}
+              {/* Text content — streamlined */}
               <div className={`flex flex-col gap-4 ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
                 {feat.isPro && (
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-orange/10 text-brand-orange text-xs font-bold w-fit">
@@ -89,12 +76,12 @@ export default function FeatureShowcase() {
                   </div>
                   <h3 className="text-2xl font-bold text-brand-navy">{t(`pp.feat.${feat.key}.title`)}</h3>
                 </div>
-                <p className="text-text-secondary text-lg leading-relaxed">
+                <p className="text-text-secondary text-base leading-relaxed">
                   {t(`pp.feat.${feat.key}.desc`)}
                 </p>
 
                 {/* Highlight points */}
-                <ul className="flex flex-col gap-2.5 mt-2">
+                <ul className="flex flex-col gap-2 mt-1">
                   {[1, 2, 3].map((n) => (
                     <li key={n} className="flex items-start gap-2.5">
                       <span className="material-symbols-outlined text-brand-teal text-lg mt-0.5">check_circle</span>
@@ -103,23 +90,12 @@ export default function FeatureShowcase() {
                   ))}
                 </ul>
 
-                {/* App + Hardware callout */}
-                <div className="mt-4 flex flex-col gap-3">
-                  {/* App insight */}
-                  <div className="p-4 rounded-2xl bg-background-teal-tint border border-brand-teal/15 flex items-start gap-3">
-                    <span className="material-symbols-outlined text-brand-teal text-xl mt-0.5">smartphone</span>
-                    <div>
-                      <p className="text-sm font-bold text-brand-navy mb-0.5">{t(`pp.feat.${feat.key}.appTitle`)}</p>
-                      <p className="text-xs text-text-secondary leading-relaxed">{t(`pp.feat.${feat.key}.appDesc`)}</p>
-                    </div>
-                  </div>
-                  {/* Hardware connection */}
-                  <div className="p-4 rounded-2xl bg-background-subtle border border-surface-border/60 flex items-start gap-3">
-                    <span className="material-symbols-outlined text-brand-navy/70 text-xl mt-0.5">sensors</span>
-                    <div>
-                      <p className="text-sm font-bold text-brand-navy mb-0.5">{t(`pp.feat.${feat.key}.hwTitle`)}</p>
-                      <p className="text-xs text-text-secondary leading-relaxed">{t(`pp.feat.${feat.key}.hwDesc`)}</p>
-                    </div>
+                {/* App insight callout only — no "How It Works" */}
+                <div className="mt-3 p-4 rounded-2xl bg-background-teal-tint border border-brand-teal/15 flex items-start gap-3">
+                  <span className="material-symbols-outlined text-brand-teal text-xl mt-0.5">smartphone</span>
+                  <div>
+                    <p className="text-sm font-bold text-brand-navy mb-0.5">{t(`pp.feat.${feat.key}.appTitle`)}</p>
+                    <p className="text-xs text-text-secondary leading-relaxed">{t(`pp.feat.${feat.key}.appDesc`)}</p>
                   </div>
                 </div>
               </div>

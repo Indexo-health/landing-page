@@ -1,7 +1,7 @@
 import { useLanguage } from '../../contexts/LanguageContext';
 
 const specRows = [
-  'sensor', 'dimensions', 'weight', 'connectivity',
+  'sensor', 'dimensions', 'thickness', 'weight', 'connectivity',
   'power', 'compatibility', 'ringBattery', 'certifications',
 ];
 

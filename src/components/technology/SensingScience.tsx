@@ -17,7 +17,7 @@ function StepIllustration({ step }: { step: number }) {
         {/* Bed frame */}
         <rect x="20" y="58" width="160" height="6" rx="2" fill="currentColor" opacity="0.08" />
         {/* Mattress */}
-        <rect x="24" y="38" width="152" height="20" rx="4" fill="currentColor" opacity="0.06" stroke="currentColor" strokeWidth="0.5" opacity="0.15" />
+        <rect x="24" y="38" width="152" height="20" rx="4" fill="currentColor" opacity="0.06" stroke="currentColor" strokeWidth="0.5" />
         <text x="100" y="51" textAnchor="middle" fill="currentColor" fontSize="6" opacity="0.25" fontWeight="600">MATTRESS</text>
         {/* Person lying (simplified side-view silhouette) */}
         {/* Head */}

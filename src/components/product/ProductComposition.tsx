@@ -2,7 +2,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 
 const components = [
   { key: 'mat', icon: 'bed', img: '/images/product/cs03-components.png', imgFit: 'object-contain' as const },
-  { key: 'ring', icon: 'ring_volume', img: '/images/product/ring-spo2.jpg', imgFit: 'object-cover' as const },
+  { key: 'ring', icon: 'ring_volume', img: '/images/product/spo2-ring-3d.png', imgFit: 'object-contain' as const },
 ];
 
 export default function ProductComposition() {
