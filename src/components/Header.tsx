@@ -11,7 +11,7 @@ export default function Header() {
     { to: '/mission', label: t('nav.mission') },
     { to: '/how-it-works', label: t('nav.howItWorks') },
     { to: '/technology', label: t('nav.technology') },
-    { to: '#', label: t('nav.blog') },
+    { to: '/blog', label: t('nav.blog') },
     { to: '/product', label: t('nav.product') },
   ];
 

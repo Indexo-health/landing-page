@@ -13,6 +13,8 @@ import HowItWorks from './pages/HowItWorks';
 import GetStarted from './pages/GetStarted';
 import Product from './pages/Product';
 import Technology from './pages/Technology';
+import Blog from './pages/Blog';
+import BlogPostPage from './pages/BlogPost';
 import NotFound from './pages/NotFound';
 import { LanguageProvider } from './contexts/LanguageContext';
 
@@ -31,6 +33,8 @@ function AppLayout() {
           <Route path="/get-started" element={<GetStarted />} />
           <Route path="/product" element={<Product />} />
           <Route path="/technology" element={<Technology />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

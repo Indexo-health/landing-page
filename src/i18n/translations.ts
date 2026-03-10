@@ -986,6 +986,25 @@ export const translations = {
     'tech.cta.title': 'Experience the Science of Better Sleep',
     'tech.cta.desc': 'Medical-grade monitoring technology, validated by clinical research, designed for your home.',
     'tech.cta.btn': 'Explore Indexo Products',
+
+    // Blog
+    'blog.hero.badge': 'Blog',
+    'blog.hero.title': 'Insights & Updates',
+    'blog.hero.desc': 'Product deep-dives, company news, and tips for better sleep health.',
+    'blog.seo.title': 'Blog — Indexo Health',
+    'blog.seo.desc': 'Read the latest updates from Indexo Health — product insights, company news, and expert tips for improving your sleep health.',
+    'blog.filter.all': 'All',
+    'blog.filter.product': 'Product',
+    'blog.filter.company': 'Company',
+    'blog.filter.feature': 'Feature',
+    'blog.category.product': 'Product',
+    'blog.category.company': 'Company',
+    'blog.category.feature': 'Feature',
+    'blog.minRead': 'min read',
+    'blog.backToList': 'Back to Blog',
+    'blog.prev': 'Previous',
+    'blog.next': 'Next',
+    'blog.empty': 'No posts found in this category yet.',
   },
   zh: {
     // Header
@@ -1974,5 +1993,24 @@ export const translations = {
     'tech.cta.title': '体验更好睡眠背后的科学',
     'tech.cta.desc': '经临床研究验证的医疗级监测技术，专为您的家庭打造。',
     'tech.cta.btn': '探索 Indexo 产品',
+
+    // 博客
+    'blog.hero.badge': '博客',
+    'blog.hero.title': '洞察与动态',
+    'blog.hero.desc': '产品深度解读、公司新闻以及改善睡眠健康的实用建议。',
+    'blog.seo.title': '博客 — Indexo Health',
+    'blog.seo.desc': '阅读 Indexo Health 最新动态——产品洞察、公司新闻以及改善睡眠健康的专业建议。',
+    'blog.filter.all': '全部',
+    'blog.filter.product': '产品',
+    'blog.filter.company': '公司',
+    'blog.filter.feature': '功能',
+    'blog.category.product': '产品',
+    'blog.category.company': '公司',
+    'blog.category.feature': '功能',
+    'blog.minRead': '分钟阅读',
+    'blog.backToList': '返回博客',
+    'blog.prev': '上一篇',
+    'blog.next': '下一篇',
+    'blog.empty': '该分类下暂无文章。',
   }
 };
