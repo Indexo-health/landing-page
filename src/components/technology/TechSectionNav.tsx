@@ -4,8 +4,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 const sections = [
   { id: 'sensing', icon: 'sensors', key: 'sensing' },
   { id: 'clinical', icon: 'clinical_notes', key: 'clinical' },
-  { id: 'architecture', icon: 'developer_board', key: 'architecture' },
-  { id: 'ecosystem', icon: 'hub', key: 'ecosystem' },
+  { id: 'platform', icon: 'hub', key: 'platform' },
 ];
 
 export default function TechSectionNav() {

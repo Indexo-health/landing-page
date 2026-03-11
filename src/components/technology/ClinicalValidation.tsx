@@ -155,15 +155,15 @@ export default function ClinicalValidation() {
 
         {/* ── Breathing Disturbance Detection (CSA / OSA) ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <div className="bg-white rounded-[24px] p-6 border border-surface-border shadow-card">
-            <div className="rounded-2xl overflow-hidden bg-gray-50 mb-4">
+          <div className="bg-white rounded-[24px] p-6 border border-surface-border shadow-card flex flex-col">
+            <div className="rounded-2xl overflow-hidden bg-gray-50 mb-4 flex-1 flex items-center justify-center p-2">
               <img src="/images/technology/breathing-csa.png" alt={t('tech.clin.csa.title')} className="w-full h-auto object-contain" />
             </div>
             <h3 className="text-lg font-bold text-brand-navy mb-2">{t('tech.clin.csa.title')}</h3>
             <p className="text-sm text-text-secondary leading-relaxed">{t('tech.clin.csa.desc')}</p>
           </div>
-          <div className="bg-white rounded-[24px] p-6 border border-surface-border shadow-card">
-            <div className="rounded-2xl overflow-hidden bg-gray-50 mb-4">
+          <div className="bg-white rounded-[24px] p-6 border border-surface-border shadow-card flex flex-col">
+            <div className="rounded-2xl overflow-hidden bg-gray-50 mb-4 flex-1 flex items-center justify-center p-2">
               <img src="/images/technology/breathing-osa.png" alt={t('tech.clin.osa.title')} className="w-full h-auto object-contain" />
             </div>
             <h3 className="text-lg font-bold text-brand-navy mb-2">{t('tech.clin.osa.title')}</h3>
@@ -177,15 +177,15 @@ export default function ClinicalValidation() {
           <p className="text-sm text-text-secondary mb-6 max-w-3xl">{t('tech.clin.hrv.desc')}</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-white rounded-[24px] p-6 border border-surface-border shadow-card">
-            <div className="rounded-2xl overflow-hidden bg-gray-50 mb-4 flex items-center justify-center p-4">
+          <div className="bg-white rounded-[24px] p-6 border border-surface-border shadow-card flex flex-col">
+            <div className="rounded-2xl overflow-hidden bg-gray-50 mb-4 flex-1 flex items-center justify-center p-4">
               <img src="/images/technology/poincare-arrhythmia.png" alt={t('tech.clin.poincare1.title')} className="max-h-[300px] object-contain" />
             </div>
             <h3 className="text-lg font-bold text-brand-navy mb-1">{t('tech.clin.poincare1.title')}</h3>
             <p className="text-sm text-text-secondary">{t('tech.clin.poincare1.desc')}</p>
           </div>
-          <div className="bg-white rounded-[24px] p-6 border border-surface-border shadow-card">
-            <div className="rounded-2xl overflow-hidden bg-gray-50 mb-4 flex items-center justify-center p-4">
+          <div className="bg-white rounded-[24px] p-6 border border-surface-border shadow-card flex flex-col">
+            <div className="rounded-2xl overflow-hidden bg-gray-50 mb-4 flex-1 flex items-center justify-center p-4">
               <img src="/images/technology/poincare-healthy.png" alt={t('tech.clin.poincare2.title')} className="max-h-[300px] object-contain" />
             </div>
             <h3 className="text-lg font-bold text-brand-navy mb-1">{t('tech.clin.poincare2.title')}</h3>

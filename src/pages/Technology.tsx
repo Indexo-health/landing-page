@@ -4,8 +4,7 @@ import TechHero from '../components/technology/TechHero';
 import TechSectionNav from '../components/technology/TechSectionNav';
 import SensingScience from '../components/technology/SensingScience';
 import ClinicalValidation from '../components/technology/ClinicalValidation';
-import SystemArchitecture from '../components/technology/SystemArchitecture';
-import FutureEcosystem from '../components/technology/FutureEcosystem';
+import PlatformEcosystem from '../components/technology/PlatformEcosystem';
 
 export default function Technology() {
   const { t } = useLanguage();
@@ -24,8 +23,7 @@ export default function Technology() {
       <TechSectionNav />
       <SensingScience />
       <ClinicalValidation />
-      <SystemArchitecture />
-      <FutureEcosystem />
+      <PlatformEcosystem />
 
       {/* ── Bottom CTA ── */}
       <section className="py-20 lg:py-28 bg-brand-navy relative overflow-hidden">
