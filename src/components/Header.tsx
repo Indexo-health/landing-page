@@ -1,11 +1,26 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage, LANGUAGES } from '../contexts/LanguageContext';
 
 export default function Header() {
   const { t, language, setLanguage } = useLanguage();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
+
+  const currentLang = LANGUAGES.find((l) => l.code === language) || LANGUAGES[0];
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+        setLangOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
 
   const navLinks = [
     { to: '/mission', label: t('nav.mission') },
@@ -34,7 +49,7 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-9">
             {navLinks.map((link) => (
               <Link
-                key={link.label}
+                key={link.to}
                 to={link.to}
                 className={`${
                   location.pathname === link.to
@@ -48,16 +63,32 @@ export default function Header() {
           </nav>
 
           <div className="hidden md:flex gap-4 items-center">
-            {/* Language switcher */}
-            <div className="relative group py-2">
-              <button className="flex items-center gap-1 text-text-main hover:text-brand-teal transition-colors text-sm font-medium">
-                <span className="material-symbols-outlined text-[18px]">language</span>
-                {language === 'en' ? 'EN' : '中文'}
+            {/* Language switcher — click dropdown */}
+            <div className="relative" ref={langRef}>
+              <button
+                onClick={() => setLangOpen(!langOpen)}
+                className="flex items-center gap-1.5 text-text-main hover:text-brand-teal transition-colors text-sm font-medium py-2"
+              >
+                <span className="text-base leading-none">{currentLang.flag}</span>
+                <span>{currentLang.shortLabel}</span>
+                <span className={`material-symbols-outlined text-[16px] transition-transform ${langOpen ? 'rotate-180' : ''}`}>expand_more</span>
               </button>
-              <div className="absolute right-0 top-full mt-0 w-24 bg-white rounded-lg shadow-lg border border-surface-border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 overflow-hidden">
-                <button onClick={() => setLanguage('en')} className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 ${language === 'en' ? 'text-brand-teal font-bold' : 'text-text-main'}`}>English</button>
-                <button onClick={() => setLanguage('zh')} className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 ${language === 'zh' ? 'text-brand-teal font-bold' : 'text-text-main'}`}>中文</button>
-              </div>
+              {langOpen && (
+                <div className="absolute right-0 top-full mt-1 w-40 bg-white rounded-xl shadow-lg border border-surface-border overflow-hidden z-50">
+                  {LANGUAGES.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => { setLanguage(lang.code); setLangOpen(false); }}
+                      className={`w-full text-left px-4 py-2.5 text-sm hover:bg-gray-50 flex items-center gap-2.5 transition-colors ${
+                        language === lang.code ? 'text-brand-teal font-bold bg-brand-teal/5' : 'text-text-main'
+                      }`}
+                    >
+                      <span className="text-base leading-none">{lang.flag}</span>
+                      <span>{lang.label}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* CTA buttons */}
@@ -91,7 +122,7 @@ export default function Header() {
           <nav className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <Link
-                key={link.label}
+                key={link.to}
                 to={link.to}
                 onClick={() => setMobileOpen(false)}
                 className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
@@ -106,20 +137,22 @@ export default function Header() {
           </nav>
 
           <div className="border-t border-surface-border pt-4 flex flex-col gap-3">
-            {/* Language switcher (mobile) */}
-            <div className="flex gap-2">
-              <button
-                onClick={() => setLanguage('en')}
-                className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors border ${language === 'en' ? 'border-brand-teal text-brand-teal bg-brand-teal/5' : 'border-surface-border text-text-main hover:bg-gray-50'}`}
-              >
-                English
-              </button>
-              <button
-                onClick={() => setLanguage('zh')}
-                className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors border ${language === 'zh' ? 'border-brand-teal text-brand-teal bg-brand-teal/5' : 'border-surface-border text-text-main hover:bg-gray-50'}`}
-              >
-                中文
-              </button>
+            {/* Language switcher (mobile) — compact grid */}
+            <div className="grid grid-cols-3 gap-2">
+              {LANGUAGES.map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => setLanguage(lang.code)}
+                  className={`py-2 px-1 rounded-lg text-xs font-medium transition-colors border flex items-center justify-center gap-1.5 ${
+                    language === lang.code
+                      ? 'border-brand-teal text-brand-teal bg-brand-teal/5'
+                      : 'border-surface-border text-text-main hover:bg-gray-50'
+                  }`}
+                >
+                  <span className="text-sm leading-none">{lang.flag}</span>
+                  <span className="truncate">{lang.shortLabel}</span>
+                </button>
+              ))}
             </div>
 
             <Link to="/get-started" onClick={() => setMobileOpen(false)} className="w-full h-11 rounded-full bg-brand-navy text-white text-sm font-bold hover:bg-brand-navy/90 transition-all shadow-md flex items-center justify-center">
